@@ -1,0 +1,34 @@
+<view class="card-user">
+    <view class="general-account">
+        <view class="general-account-top">钱包余额(通用)</view>
+        <view class="general-account-middle">{{amount/100}}元</view>
+        <view class="card-account-item-bottom general-account-bottom">
+            <image src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_chongzhi.png"></image>
+            <view bindtap="navtoTopup" class="recharge-btn" data-walletid="{{walletId}}">
+                <text>去充值</text>
+                <text class="iconfont icon-youjiantou"></text>
+            </view>
+        </view>
+    </view>
+    <view class="special-account-title" wx:if="{{isShowThisTitle}}">
+        <text>专用账户</text>
+        <image bindtap="toCardExplain" class="add-card-doubt" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_weit.png"></image>
+    </view>
+    <view class="card-account-list" wx:if="{{isShowCardList}}">
+        <view class="card-account-item" wx:for="{{cardList}}" wx:key="id">
+            <view class="card-account-item-top">
+                <view class="card-account-title site-name">
+                    <image src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_zd2x.png"></image> {{item.siteName}}(专用)
+          </view>
+                <view class="card-account-price">{{item.amount/100}}元</view>
+                <view class="card-account-title site-address">
+                    <image src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_dizhi.png"></image> {{item.addressDetail}}
+          </view>
+            </view>
+            <view class="card-account-item-bottom">
+                <view bindtap="toRechargecard" class="recharge" data-activityenabled="{{item.activityEnabled}}" data-siteid="{{item.siteId}}" data-walletid="{{item.id}}">充值</view>
+                <view bindtap="toAvailablepile" class="available-plie" data-chargeSiteid="{{item.siteId}}">可用桩点</view>
+            </view>
+        </view>
+    </view>
+</view>

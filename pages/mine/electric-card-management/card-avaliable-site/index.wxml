@@ -1,0 +1,35 @@
+<view>
+    <view bindtap="navTositedetail" class="manager" data-siteid="{{item.id}}" wx:for="{{nearSiteList}}" wx:key="id">
+        <view class="manager-wrapper">
+            <view class="head">
+                <text class="name">{{item.name}}</text>
+                <view catchtap="listNavToSite" class="rg" data-siteinfo="{{item}}">
+                    <image src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/navarrow.png"></image>
+                    <view style="white-space:nowrap;font-size:25rpx;color:#858585;">{{item.distance}}</view>
+                </view>
+            </view>
+            <view class="lf">
+                <view class="location">{{item.location}}</view>
+            </view>
+        </view>
+        <view class="status">
+            <view class="siteStatus">
+                <view class="avaliable">
+                    <view></view>
+                    <text>空闲{{item.avaliable}}个</text>
+                </view>
+                <view class="total">
+                    <view></view>
+                    <text>共{{item.total}}个</text>
+                </view>
+            </view>
+            <view style="display:inline-block;text-align:center;width: 26%;" wx:if="{{isShowPrice}}">
+                <text class="price">{{item.price}}</text>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{!nearSiteList.length}}">
+        <image src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/nosite.png" style="width:300rpx;height:360rpx;margin:100rpx auto 70rpx auto;display:block; "></image>
+        <view style="text-align:center;color:#3dca76;font-size:32rpx;">暂无适用充电站</view>
+    </view>
+</view>

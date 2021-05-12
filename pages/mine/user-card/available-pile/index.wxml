@@ -1,0 +1,61 @@
+<block wx:if="!{{nonearsite}}">
+    <view bindtap="navTositedetail" class="{{item.status==1?'manager':'offlinemanager'}} " data-avaliable="{{item.avaliable}}" data-distance="{{item.distance}}" data-needforge="{{item.needforge}}" data-pileNo="{{item.pileNo}}" data-siteid="{{item.id}}" data-status="{{item.status}}" wx:for="{{nearSiteList}}" wx:key="id">
+        <view class="manager-wrapper">
+            <view class="top">
+                <view class="area">
+                    <view class="name">{{item.siteName}}</view>
+                    <view class="wenfather">
+                        <text class="wen">桩号</text>
+            {{item.pileNo}}
+          </view>
+                </view>
+                <view catchtap="collecteBtn" class="distancefather" data-chargePileId="{{item.id}}" data-index="{{index}}">
+                    <view class="rg-child">
+                        <view id="mjltest">
+                            <image src="{{item.status==1?item.collected?'../../../../icons/icon-comment-click2x.png':'../../../../icons/icon-comment-notchick2x.png':item.collected?'../../../../icons/icon-myfavorite-click-off-line2x.png':'../../../../icons/icon-myfavorite-notclick-off-line2x.png'}}"></image>
+                            <view class="distance">收藏</view>
+                        </view>
+                    </view>
+                </view>
+                <view catchtap="navToSite" class="distancefather" data-siteinfo="{{item}}">
+                    <view class="rg-child">
+                        <view id="mjltest">
+                            <image src="{{item.status==1?'http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/navarrow.png':'http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/offlinenavarrow.png'}}"></image>
+                            <view class="distance">{{item.distance}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="location">
+                <text class="add">地址</text>
+        {{item.address}}
+      </view>
+            <view class="bot">
+                <view>
+                    <text class="kongxian">
+                        <text></text>
+            空闲{{item.avaliable}} 个
+          </text>
+                    <text class="zaichong">
+                        <text></text>
+            共{{item.total}}个
+          </text>
+                    <block wx:if="{{isShowPrice}}">
+                        <text class="pricestyle" wx:if="{{item.feeType==1}}">{{item.price/100}} 元/时</text>
+                        <text class="pricestyle" wx:elif="{{item.feeType==2}}">{{item.price/100}} 元/千瓦时</text>
+                        <text class="pricestyle" wx:else>{{item.price}}</text>
+                    </block>
+                </view>
+                <view style="flex:0 0 {{item.activewidth+'px'}};text-align:center;">
+                    <view class="xinhao">
+                        <view class="signalbgc{{item.signal}}"></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</block>
+<view wx:if="{{nonearsite}}">
+    <image src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/nosite.png" style="width:300rpx;height:360rpx;margin:100rpx auto 70rpx auto;display:block; "></image>
+    <view style="text-align:center;color:#3dca76;font-size:32rpx;">暂无充电桩</view>
+</view>

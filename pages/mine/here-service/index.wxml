@@ -1,0 +1,25 @@
+<view class="button-father" wx:if="{{miniType==1}}">
+    <button class="button" openType="contact" style="margin-left:15rpx;">在线客服</button>
+</view>
+<view>
+    <view class="ques">常见问题</view>
+    <view class="manager" wx:for="{{helpJson}}" wx:key="index">
+        <view bindtap="switchDrop" class="ask-wrapper" data-index="{{index}}">
+            <view class="ask-wrapper-txt">{{index+1}}、{{item.title}}</view>
+            <view class="iconfont   {{item.istap?'icon-up':'icon-down'}}"></view>
+        </view>
+        <view class="answer-wrapper" wx:if="{{item.istap}}">
+            <text>{{item.content}}</text>
+            <view wx:if="{{isHasVideo}}">
+                <view wx:if="{{item.video}}">
+                    <view bindtap="videoplay" class="play-button" wx:if="{{startbutton}}">展开视频</view>
+                    <view bindtap="videohide" class="play-button" wx:if="{{closebutton}}">收起视频</view>
+                    <view class="videodiv">
+                        <video src=" {{item.videosrc}} " wx:if="{{videoshow}}"></video>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="phone" class="phone ">客服电话</view>

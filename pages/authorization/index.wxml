@@ -1,0 +1,14 @@
+<view wx:if="{{whetherthelogin}}">
+    <view class="logo">
+        <image src="{{logoImg}}"></image>
+    </view>
+    <view class="info">
+        <view class="info-hi">Hi~请登录</view>
+        <view class="info-thank">登录后我们将更好地为您服务</view>
+    </view>
+    <button bindgetuserinfo="bindGetUserInfo" class="logo-button" openType="getUserInfo">新用户快速登录</button>
+    <button bindtap="noLogin" class="nologo-button">退出登录</button>
+</view>
+<view hidden="{{!phoneBound}}">
+    <register bind:onRegisteSuccess="onRegisteSuccess" bind:shouldCloseRegistDialog="closeRegistDialog" registerType="1"></register>
+</view>

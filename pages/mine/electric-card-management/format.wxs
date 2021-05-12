@@ -1,0 +1,14 @@
+var format = (function(cardNo) {
+    cardNo = cardNo.toString();
+    var arr = [];
+    for (var i = 0; i < cardNo.length; i++) {
+        arr.push(cardNo[((nt_0 = (i), null == nt_0 ? undefined : 'number' === typeof nt_0 ? nt_0 : "" + nt_0))]);
+        if (i > 0 && (i + 1) % 4 == 0) {
+            arr.push('\t')
+        }
+    };
+    return (arr.join(''))
+});
+module.exports = ({
+    format: format,
+});

@@ -1,0 +1,38 @@
+<block wx:if="{{condition}}">
+    <view class="evaluate-content">
+        <view class="choose-stars">
+            <text>充电服务</text>
+            <image bindtap="chooseStar" data-index="0" src="{{currentStar>=0?'../../../../icons/icon-comment-click2x.png':'../../../../icons/icon-comment-notchick2x.png'}}"></image>
+            <image bindtap="chooseStar" data-index="1" src="{{currentStar>=1?'../../../../icons/icon-comment-click2x.png':'../../../../icons/icon-comment-notchick2x.png'}}"></image>
+            <image bindtap="chooseStar" data-index="2" src="{{currentStar>=2?'../../../../icons/icon-comment-click2x.png':'../../../../icons/icon-comment-notchick2x.png'}}"></image>
+            <image bindtap="chooseStar" data-index="3" src="{{currentStar>=3?'../../../../icons/icon-comment-click2x.png':'../../../../icons/icon-comment-notchick2x.png'}}"></image>
+            <image bindtap="chooseStar" data-index="4" src="{{currentStar>=4?'../../../../icons/icon-comment-click2x.png':'../../../../icons/icon-comment-notchick2x.png'}}"></image>
+        </view>
+        <view class="section">
+            <textarea bindinput="startEvaluation" maxlength="200" placeholder="说说它的优点和美中不足的地方吧" placeholderStyle="color:#eeeeee;padding-left:25rpx;"></textarea>
+            <view class="word-num">{{wordNum}}/200</view>
+        </view>
+    </view>
+    <view bindtap="evaluateBtn" class="release-btn {{noClick?'no-click':''}}">提交</view>
+</block>
+<view class="has-evaluate-content" wx:else>
+    <view class="my-score">
+        <text>我的评分</text>
+        <view>
+            <image src="{{feedbackInfo.stars>=0?'../../../../icons/icon-comment-click2x.png':'../../../../icons/icon-comment-notchick2x.png'}}"></image>
+            <image src="{{feedbackInfo.stars>=1?'../../../../icons/icon-comment-click2x.png':'../../../../icons/icon-comment-notchick2x.png'}}"></image>
+            <image src="{{feedbackInfo.stars>=2?'../../../../icons/icon-comment-click2x.png':'../../../../icons/icon-comment-notchick2x.png'}}"></image>
+            <image src="{{feedbackInfo.stars>=3?'../../../../icons/icon-comment-click2x.png':'../../../../icons/icon-comment-notchick2x.png'}}"></image>
+            <image src="{{feedbackInfo.stars>=4?'../../../../icons/icon-comment-click2x.png':'../../../../icons/icon-comment-notchick2x.png'}}"></image>
+        </view>
+    </view>
+    <view class="small-line"></view>
+    <view class="my-feedback">
+        <text>我的反馈：</text>
+        <text class="platform-reply-content">{{feedbackInfo.content}}</text>
+    </view>
+    <view class="platform-reply">
+        <text>平台回复：</text>
+        <text class="platform-reply-content">{{feedbackInfo.revert}}</text>
+    </view>
+</view>

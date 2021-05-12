@@ -1,0 +1,123 @@
+<view class="{{chargeStatus==1?'bg-top':chargeStatus==2?'orangebg-top':'redbg-top'}}">
+    <view class="outer">
+        <view class="{{chargeStatus?'content':'red-content'}}">
+            <view class="wave-bg">
+                <view class="wave" style="height: {{waveHeight}};"></view>
+            </view>
+            <view class="content-Wrapper">
+                <block wx:if="{{suspendstyle}}">
+                    <view class="countdown">
+                        <view class="power">{{power}}瓦</view>
+                    </view>
+                    <view class="time-num">{{countdown}}</view>
+                    <view class="{{chargeStatus?'':txtColor}} 'countDesc'">
+            {{chargeStatus==1?'正在充电':chargeStatus==2?'正在启动中':'请接上电缆'}}
+          </view>
+                </block>
+                <block wx:else>
+                    <view class="suspend-img">
+                        <image src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/trianglewarning@3x.png"></image>
+                    </view>
+                    <view class="suspend-text">已断电!!!</view>
+                </block>
+            </view>
+        </view>
+        <view class="{{chargeStatus?'box':'box-no-animation'}}"></view>
+        <view class="{{chargeStatus?'line':'line-no-animation'}}"></view>
+        <view></view>
+    </view>
+    <view class="charge-area">
+        <view class="sitename-collected">
+            <text class="area-dtl">{{siteName}}</text>
+            <image bindtap="collecteBtn" src="{{collected?'../../../icons/icon_charging_CollectionY2x.png':'../../../icons/icon_charging_notCollectionY2x.png'}}"></image>
+        </view>
+        <view class="port-location" hidden="{{!controlCharginginfo}}">
+      {{siteAddress}}{{pileAddress}}{{pileNo}}号桩{{portNum}}路端口
+    </view>
+        <view bindtap="controlShowCharginginfo" class="iconfont {{controlCharginginfo?'icon-up':'icon-down'}} changeicon"></view>
+    </view>
+</view>
+<view class="{{chargeStatus==1?' bg-cloud ':chargeStatus==2?' bg-orangecloud ':' bg-redcloud '}}"></view>
+<view class="shuntiming clearfloat">
+    <view class="starttiming">
+        <view class="starttxt">开始时长</view>
+        <view class="starttime">{{Isthetiming}}</view>
+    </view>
+    <view class="money">
+        <view class="moneytxt">消费金额</view>
+        <view class="moneynum">{{expectedconsume?expectedconsume:0}}</view>
+    </view>
+</view>
+<button bindtap="onButtonClick" class="{{chargeStatus==1?'greenbutton':chargeStatus==2?'orangebutton':'redbutton'}}" hoverClass="{{chargeStatus?'greenbutton-hover':'redbutton-hover'}}  " wx:if="{{chargeStatus!=null&&chargeStatus!=2&&suspendstyle}}">
+  {{chargeStatus?'结束充电':'电缆已接好'}}
+</button>
+<button bindtap="onBackorStopClick" class="backindexbtn" wx:if="{{chargeStatus!=null&&!chargeStatus&&suspendstyle}}">
+  {{'结束充电'}}
+</button>
+<button bindtap="chargeingbackbtn" class="backindexbtn" wx:if="{{chargeStatus&&pageDeep==1&&suspendstyle}}">
+  {{'返回首页'}}
+</button>
+<view class="warningtip" wx:if="{{!suspendstyle}}">
+    <view class="warning-tip-img">
+        <view style="display:inline-block;vertical-align:middle;">
+            <image src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/trianglewarning@3x.png"></image>
+        </view>
+        <view class="warning-tip-txt">目前充电桩临时断电，此期间不计任何费用，电力恢复时将继续充电，请耐心等待!</view>
+    </view>
+    <button bindtap="onpowerToStop" class="powerToStop">{{'结束充电'}}</button>
+</view>
+<view class="drawer-screen" wx:if="{{showModalStatus}}"></view>
+<view class="searchcable" wx:if="{{showModalStatus}}">
+    <view class="searchcable-k">
+        <view class="searchcable-b">
+            <view class="searchcable-m">{{context}}</view>
+        </view>
+    </view>
+    <view bindtap="powerDrawer" class="btn-ok" data-statu="close">确定</view>
+</view>
+<view class="drawer-screen" wx:if="{{showFinshDialogue}}"></view>
+<view class="drawer-box" wx:if="{{showFinshDialogue}}">
+    <view class="drawer-content">
+        <view class="top grid">
+            <view class="title  zidongfinish">{{finshtext}}</view>
+        </view>
+    </view>
+    <view bindtap="chargeFinshConfirm" class="btn-ok">确定</view>
+</view>
+<view class="mask" wx:if="{{showWelcome}}">
+    <view class="welcome-content">
+        <view class="pic-wrap">
+            <image bindtap="jump" class="picture-size" data-ad="{{adContent}}" mode="widthFix" src="{{adContent.imgUrl}}"></image>
+            <view class="add-statement">广告推广</view>
+            <view class="close-time">{{closeTime}}S</view>
+        </view>
+        <image bindtap="hidePicture" class="close-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_guanbi2x.png"></image>
+    </view>
+</view>
+<view bindtap="closeNoLoad" class="mask" wx:if="{{showNoLoad}}">
+    <view class="no-load">
+        <view class="no-load-top-bg"></view>
+        <view class="two-ball">
+            <view class="no-load-ball">
+                <view class="ball-text {{txtColor}}">{{power}}瓦</view>
+                <image class="ball-img" src="../../../icons/yuan.png"></image>
+            </view>
+            <view class="no-load-ball">
+                <view class="ball-text {{txtColor}}">{{countdown}}</view>
+                <image class="ball-img" src="../../../icons/yuan.png"></image>
+            </view>
+        </view>
+        <image class="no-load-img" src="../../../icons/img-chahua.png"></image>
+        <view class="warning">
+            <image class="no-load-warning" src="../../../icons/icon-weixian.png"></image>
+            <text class="no-load-warning-text {{warnTextColor}}">未检测到负载！</text>
+        </view>
+        <button catchtap="checkCharge" class="no-load-but no-load-top-but {{restartTimes?'':'no-click'}}">
+      {{showRestartText}}
+    </button>
+        <button catchtap="endAndChangePort" class="no-load-but no-load-bot-but">结束，我要更换端口充电</button>
+    </view>
+</view>
+<image bindtap="jump" class="bottom-add" data-ad="{{adContent1}}" mode="widthFix" src="{{adContent1.imgUrl}}" wx:if="{{adContent1.imgUrl}}">
+    <view class="add-statement">广告推广</view>
+</image>

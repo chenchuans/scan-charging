@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "register": "../../comps/register/index"
+    },
+    "navigationBarTitleText": "个人中心",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#24c771"
+}

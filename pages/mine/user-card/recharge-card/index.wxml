@@ -1,0 +1,31 @@
+<view class="headerTips">
+    <view class="headerTipsTitle">该优惠仅适用于</view>
+    <view class="specialSite">
+        <image src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_dingwei.png"></image>
+        <text>{{siteName}}（专用）</text>
+    </view>
+</view>
+<view class="topupwrapper clearfloat">
+    <view bindtap="ontapTopup" class="topupAmount" data-curtopupindex="{{index}}" data-id="{{item.id}}" style="background:{{curtopup===index?'linear-gradient(to bottom, #24c771, #2eff90)':''}};color:{{curtopup===index?'#fff':''}};margin-right:{{(index+1)%2==0?0:'6%'}};border:{{curtopup===index?'2rpx solid #fff':'2rpx solid #24c771'}};" wx:for="{{topupType}}" wx:key="id">
+        <view>
+            <view class="chong" style="color:{{curtopup===index?'#fff':''}};">
+                <text class="chong-child">{{item.rechargeAmount/100}}</text>
+                <text class="chong-unit">元</text>
+            </view>
+            <view class="song" style="color:{{curtopup===index?'#fff':''}};" wx:if="{{item.bonusAmount>0}}">
+                <view class="songxie">
+          送{{item.bonusAmount/100}}元
+        </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="statement">
+    <checkbox-group bindchange="checkboxChange">
+        <checkbox checked="{{checked}}" class="checkbox" color="#24c771">我已同意</checkbox>
+    </checkbox-group>
+    <text bindtap="navTotopupagreement" class="statementWrapper">《充值活动协议》</text>
+</view>
+<view style="padding:0 38rpx;">
+    <button bindtap="nowPay" class="oncePay" hoverClass="atOncePay">立即充值</button>
+</view>

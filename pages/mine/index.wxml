@@ -1,0 +1,128 @@
+<view class="recharge">
+    <view bindtap="controlChangeUserModal" class="disFlex recharge-wrapper">
+        <image class="lightning" src="{{avatarUrl}}"></image>
+        <view class="user {{phone?'':'phone'}}">{{phone?toHide.toHide(phone):'登录体验更多功能'}}</view>
+        <view class="login-now" wx:if="{{!phone}}">立即登录</view>
+    </view>
+    <view class="disFlex suspension">
+        <view class="balance">充电账户总额
+      <view class="balancepr">
+                <text>{{walletAmount/100}}</text>元</view>
+        </view>
+        <view bindtap="navtoTopup" class="topup">查看</view>
+    </view>
+</view>
+<view bindtap="jumptoCardManagement" class="disFlex manage-card">
+    <image class="manage-card-left" mode="widthFix" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_diankaguanli.png"></image>
+    <view class="manage-card-middle">
+        <view>电卡管理</view>
+        <view>线上线下电卡一键管理</view>
+    </view>
+    <view class="iconfont icon-youjiantou manageCardBottom"></view>
+</view>
+<block wx:if="{{noAgent}}">
+    <view class="list-title">加盟合作</view>
+    <view bindtap="jumpToapplyMaster" class="join-us">
+        <image mode="widthFix" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/hezuo.gif"></image>
+    </view>
+</block>
+<block wx:if="{{pilingAccount&&isWeChat}}">
+    <view class="list-title">站点管理</view>
+    <view bindtap="jumpToH5" class="disFlex intoWallet">
+        <image class="intoWalletImgpilingAccount" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/pic_zhandianguanli.png"></image>
+        <view class="intoWalletTitle">
+            <view>站点管理</view>
+            <view>建桩建站更方便</view>
+        </view>
+        <button class="intoWalletBtnproperty">立即查看</button>
+    </view>
+</block>
+<block wx:if="{{isAgent&&isWeChat}}">
+    <view class="list-title">代理商管理</view>
+    <view class="disFlex intoWallet">
+        <image class="intoWalletImg" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/pic_dailishang.png"></image>
+        <view class="intoWalletTitle">
+            <view>代理权益</view>
+            <view>账户余额及数据统计等...</view>
+        </view>
+        <button bindgetuserinfo="jumpToagentH5" class="intoWalletBtnproperty" openType="getUserInfo">立即体验</button>
+    </view>
+</block>
+<block wx:if="{{property&&isWeChat}}">
+    <view class="list-title">收益管理</view>
+    <view class="disFlex intoWallet">
+        <image class="intoWalletImgproperty" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/pic_shouyizhanghu.png"></image>
+        <view class="intoWalletTitle">
+            <view>收益账户</view>
+            <view>加盟获取收益</view>
+        </view>
+        <button bindgetuserinfo="jumpToPropertyH5" class="intoWalletBtnproperty" openType="getUserInfo">立即查看</button>
+    </view>
+</block>
+<view class="list-title">更多推荐</view>
+<view class="more-rec">
+    <view bindtap="accountManagement" class="more-rec-item">
+        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_zhanghaoguanli.png"></image>
+        <view class="more-rec-item-title">账号管理</view>
+    </view>
+    <view bindtap="faultRepair" class="more-rec-item">
+        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_baoxiu.png"></image>
+        <view class="more-rec-item-title">故障报修</view>
+    </view>
+    <view bindtap="contactService" class="more-rec-item">
+        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_kefu.png"></image>
+        <view class="more-rec-item-title">联系客服</view>
+    </view>
+    <view bindtap="showShare" class="more-rec-item" wx:if="{{subscribeEnable&&isWeChat}}">
+        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_gongzhonghao.png"></image>
+        <view class="more-rec-item-title">关注公众号</view>
+    </view>
+    <view bindtap="shareBtn" class="more-rec-item" wx:if="{{isWeChat}}">
+        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_fenxiang.png"></image>
+        <view class="more-rec-item-title">我的分享</view>
+    </view>
+    <view bindtap="goFeedback" class="more-rec-item">
+        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_fankui.png"></image>
+        <view class="more-rec-item-title">意见反馈</view>
+    </view>
+    <view bindtap="versionInfo" class="more-rec-item">
+        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_guanyu.png"></image>
+        <view class="more-rec-item-title">版本信息</view>
+    </view>
+</view>
+<view class="change-wrapper" wx:if="{{changeUsermodal}}">
+    <view class="change-wrapper-child">
+        <view class="change-wrapper-in">
+            <view bindtap="changeoPerate" class="x" data-type="2">更换手机号</view>
+            <view bindtap="changeoPerate" class="y" data-type="3">切换账号</view>
+            <view bindtap="hideControlChangeUserModal" style="border:none;">取消</view>
+        </view>
+    </view>
+</view>
+<view bindtap="hidechangeUsermodal" class="shadow" wx:if="{{changeUsermodal}}"></view>
+<view wx:if="{{changeUserOrPhone}}">
+    <register bind:onRegisteSuccess="onRegisteSuccess" bind:shouldCloseRegistDialog="closeRegistDialog" registerType="{{registerType}}"></register>
+</view>
+<view class="shareToFriends" wx:if="{{shareToFriends}}">
+    <view class="shareToFriends-title">- 和好友一起来充电 -</view>
+    <view class="shareToFriends-content">
+        <view class="shareToFriends-content-btn">
+            <button openType="share">
+                <image class="wechat-friends" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/share/icon_me_fenxiang_weixin@3x.png"></image>
+                <view>微信好友</view>
+            </button>
+        </view>
+        <view bindtap="share" class="shareToFriends-content-btn">
+            <image class="wechat-friends" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/share/icon_me_fenxiang_pengyouquan@3x.png"></image>
+            <view>朋友圈</view>
+        </view>
+    </view>
+</view>
+<view bindtap="hidechangeUsermodal" class="mask" wx:if="{{shareFriendsQuan}}">
+    <canvas canvasId="shareImg" style="width:588px;height:888px;z-index: 6;"></canvas>
+    <view class="preview" hidden="{{hidden}}">
+        <image mode="widthFix" src="{{prurl}}"></image>
+        <button bindtap="save" size="default" type="primary">保存分享图</button>
+    </view>
+</view>
+<wxs module="toHide" src="toHide.wxs" />

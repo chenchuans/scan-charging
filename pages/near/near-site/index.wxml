@@ -1,0 +1,93 @@
+<view class="{{showEV?'page-ev':'page'}}">
+    <view class="modular-tabs" wx:if="{{showEV}}">
+        <view bindtap="changeModular" class="modular-item {{currentModularIndex==index?'modular-selected':''}}" data-index="{{index}}" wx:for="{{modularTabs}}" wx:key="index">
+            <view>{{item}}</view>
+            <view class="underline" wx:if="{{currentModularIndex==index}}"></view>
+        </view>
+    </view>
+    <block wx:if="{{whatPattern}}">
+        <view class="{{showEV?'header-content-ev':'header-content'}}">
+            <view class="header-map">
+                <icon class="search-icon-map" size="15" type="search"></icon>
+                <input bindinput="searchValueInput" class="search-hint-map" placeholder="请输入站点名称搜索" value="{{searchValue}}">
+          {{searchRes}}
+        </input>
+            </view>
+        </view>
+        <view class="wrap-site-list" wx:if="{{!noNearSite}}">
+            <view bindtap="navTositedetail" class="manager" data-siteid="{{item.id}}" data-vehicletype="{{item.vehicleType}}" wx:for="{{nearSiteList}}" wx:key="id">
+                <view class="manager-wrapper">
+                    <view class="head">
+                        <image class="site-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_{{item.vehicleType===1?'diandong':'qi'}}chetubiao.png"></image>
+                        <text class="name">{{item.name}}</text>
+                        <view catchtap="listNavToSite" class="rg" data-siteinfo="{{item}}">
+                            <image src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_daohang.png"></image>
+                            <view>{{item.distance}}</view>
+                        </view>
+                    </view>
+                    <view class="lf">
+                        <view class="location">{{item.location}}</view>
+                    </view>
+                </view>
+                <view class="pile-status">
+                    <text class="avaliable-pile">可用桩点{{item.avaliablePile}}个</text>
+                    <text class="total-pile">/共{{item.pileTotal}}个</text>
+                </view>
+            </view>
+            <view class="tips1">
+                <view class="refresh-block" wx:if="{{loading}}">
+                    <image animation="{{refreshAnimation}}" class="loadpng" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/loader.png"></image>
+                </view>
+                <view class="nocontent" wx:if="{{hasMore}}">
+                    <text>没有更多内容了</text>
+                </view>
+            </view>
+        </view>
+        <view class="wrap-no-near-site" wx:if="{{noNearSite}}">
+            <image class="no-near-site" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/nosite.png"></image>
+            <view class="no-near-site-content">附近暂无充电站</view>
+        </view>
+        <view bindtap="toMapModel" class="to-map-model">
+            <image class="toMapModelImg" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/btn_ditumoshi.png"></image>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="{{showEV?'header-content-ev':'header-content'}}">
+            <view bindtap="searchNearby" class="header-map">
+                <icon class="search-icon-map" size="15" type="search"></icon>
+                <text class="search-hint-map">{{searchRes}}</text>
+            </view>
+        </view>
+        <view class="{{showEV?'main-ev':'main'}}">
+            <map bindmarkertap="markertap" bindtap="maptap" enableScroll="{{true}}" enableZoom="{{true}}" id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" scale="{{scale}}" showLocation="{{true}}" style="width: 100%; height: 100%;" subkey="{{subkey}}">
+                <cover-view class="tip" wx:if="{{condition}}">
+                    <cover-view bindtap="navTositedetail" class="tip-left" data-siteid="{{tapSiteDetail.id}}" data-vehicletype="{{tapSiteDetail.vehicleType}}">
+                        <cover-view class="placenames">
+                            <cover-image class="placeicon" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/placeicon.png"></cover-image>
+                            <cover-view class="placeicon-text">{{tapSiteDetail.name}}</cover-view>
+                        </cover-view>
+                        <cover-view class="site-status">
+                            <cover-view class="free-ports">
+                                <cover-view class="free-spot"></cover-view>
+                                <cover-view>空闲{{tapSiteDetail.avaliable}} 个</cover-view>
+                            </cover-view>
+                            <cover-view class="total-ports">
+                                <cover-view class="total-spot"></cover-view>
+                                <cover-view>共{{tapSiteDetail.total}}个</cover-view>
+                            </cover-view>
+                        </cover-view>
+                        <cover-view class="detail-addr">{{tapSiteDetail.address}}</cover-view>
+                    </cover-view>
+                    <cover-view bindtap="navToSite" class="tip-right">
+                        <cover-image class="navarrow" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_daohang.png"></cover-image>
+                        <cover-view>{{tapSiteDetail.distance}}</cover-view>
+                    </cover-view>
+                </cover-view>
+                <cover-view class="to-map-model current-location">
+                    <cover-image bindtap="onControlTap" class="current-location-img" src="../../../icons/icon_dingwei.png"></cover-image>
+                    <cover-image bindtap="toListModel" class="toMapModelImg" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/btn_liebiaomoshi.png"></cover-image>
+                </cover-view>
+            </map>
+        </view>
+    </block>
+</view>

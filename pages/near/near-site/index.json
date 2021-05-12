@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "附近充电站",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#24c771",
+    "enablePullDownRefresh": true,
+    "usingComponents": {}
+}

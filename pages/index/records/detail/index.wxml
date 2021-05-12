@@ -1,0 +1,72 @@
+<view class="chargearea">
+    <image class="icon" src="/icons/charging.png"></image>
+    <view class="areaDtl">{{orderDetail.siteName}}</view>
+</view>
+<view class="moneywrapper">
+    <view class="rmb">¥ {{consumeAmount?consumeAmount:0}}</view>
+    <view class="view">充电金额(元)</view>
+</view>
+<view class="common ordernum">
+    <view class="commonleft">订单编号</view>
+    <view class="commonright">{{orderDetail.orderNo?orderDetail.orderNo:0}}</view>
+</view>
+<view class="common totalChild">
+    <view class="commonleft">充电时长</view>
+    <view class="commonright">{{format.format(orderDetail.actualMinute)}}</view>
+</view>
+<view class="common totalChild" wx:if="{{isShowPay}}">
+    <view class="commonleft">钱包支付</view>
+    <view class="commonright">
+    ¥ {{orderDetail.balanceAmount/100?orderDetail.balanceAmount/100:0}}
+  </view>
+</view>
+<view class="common totalChild" wx:if="{{isShowPay}}">
+    <view class="commonleft">{{payway}}</view>
+    <view class="commonright">¥ {{orderDetail.paidAmount/100?orderDetail.paidAmount/100:0}}</view>
+</view>
+<view class="common actualpay">
+    <view class="commonleft">实际消费</view>
+    <view class="commonright">
+    ¥ {{orderDetail.consumeAmount/100?orderDetail.consumeAmount/100:0}}
+  </view>
+</view>
+<view class="common cashback">
+    <view class="commonleft">剩余返还</view>
+    <view class="commonright">¥ {{orderDetail.returnAmount/100?orderDetail.returnAmount/100:0}}</view>
+</view>
+<view class="common cashback">
+    <view class="commonleft">桩点位置</view>
+    <view class="commonright">{{orderDetail.siteName+orderDetail.location}}</view>
+</view>
+<view class="common cashback">
+    <view class="commonleft">充电端口</view>
+    <view class="commonright">{{orderDetail.pileNo}}号桩{{orderDetail.port}}路端口</view>
+</view>
+<block wx:if="{{isShowCanvas}}">
+    <view class="canvas" wx:if="{{showCanvas}}">
+        <canvas canvasId="lineCanvas" class="canvas" disableScroll="true" wx:if="{{isWeChat}}"></canvas>
+        <canvas class="canvas" height="420" id="canvasColumn" width="750" wx:else></canvas>
+    </view>
+</block>
+<view bindtap="payment" class="payoutstandinorder" wx:if="{{outstandinorder&&status==2}}">立即支付</view>
+<view bindtap="continueCharge" class="payoutstandinorder" wx:if="{{!outstandinorder&&orderDetail.continueChargeEnable&&orderDetail.vehicleType===1}}">
+  续充
+</view>
+<view bindtap="evaluate" class="payoutstandinorder" wx:if="{{!discuss}}">反馈</view>
+<view wx:if="{{minejump}}">
+    <navigator class="recordback" openType="reLaunch" url="/pages/index/index">回到首页</navigator>
+</view>
+<view class="mask" wx:if="{{showWelcome}}">
+    <view class="welcome-content">
+        <view class="pic-wrap">
+            <image bindtap="jump" class="picture-size" data-ad="{{adContent}}" mode="widthFix" src="{{adContent.imgUrl}}"></image>
+            <view class="close-time">{{closeTime}}S</view>
+            <view class="add-statement">广告推广</view>
+        </view>
+        <image bindtap="hidePicture" class="close-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_guanbi2x.png"></image>
+    </view>
+</view>
+<image bindtap="jump" class="bottom-add" data-ad="{{adContent1}}" mode="widthFix" src="{{adContent1.imgUrl}}" wx:if="{{adContent1.imgUrl}}">
+    <view class="add-statement">广告推广</view>
+</image>
+<wxs module="format" src="format.wxs" />

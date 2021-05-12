@@ -1,0 +1,49 @@
+<form reportSubmit="true">
+    <view class="amount">提现金额</view>
+    <view class="inputamount">
+        <view class="keyamount">
+            <view class="symbol">¥</view>
+            <input bindinput="onInput" class="keyamount-input" placeholderClass="input-placeholder" type="digit" value="{{initValue}}"></input>
+            <view bindtap="allTurnOut" class="allturnout">全部转出</view>
+        </view>
+        <view class="miaoshu">
+            <view class="{{wrong?'red':'gray'}}">{{result}}</view>
+        </view>
+    </view>
+    <view class="payee" wx:if="{{realName}}">
+        <view class="payeeName">收款方姓名</view>
+        <input class="payee-input" disabled="true" placeholder="请填写收款人微信实名认证姓名" placeholderClass="input-placeholder" type="text" value="{{realName}}"></input>
+    </view>
+    <view bindtap="closePop" class="mask" wx:if="{{writeRealName}}"></view>
+    <view class="write-name" wx:if="{{writeRealName}}">
+        <view class="name-check">实名认证</view>
+        <view>
+            <input bindinput="getRealName" class="real-name" placeholder="请填写收款人微信实名认证姓名" placeholderClass="input-placeholder" type="text" value="{{realName}}"></input>
+            <view class="name-tips">*填写微信实名认证姓名，填写后不可修改，请确认后填写！</view>
+        </view>
+        <view class="cancel-confirm">
+            <view bindtap="closePop" class="cancel">取消</view>
+            <view bindtap="confirm" class="confirm">确定</view>
+        </view>
+    </view>
+    <view class="codechild">
+        <input bindinput="getCaptcha" class="code-input" cursorSpacing="20" name="captcha" placeholder="请输入登录账号收到的验证码" placeholderClass="input-placeholder" type="number"></input>
+        <text bindtap="getVerificationCode" class="{{VerificationCode?'contactgetcode':'countdownnow'}}" id="{{VerificationCode?'contactgetcode':'countdownnow'}}">{{time}}</text>
+    </view>
+    <view class="{{wrong?'hidden':'show'}} actualtoaccount">实际到账: {{finalAmount/100}}元</view>
+    <view class="tips">
+        <view class="title">提示:1.提现手续费{{remitFee/100}}元/次</view>
+        <view class="title2">2.姓名为微信实名认证用的姓名,提现到微信钱包</view>
+        <view class="title2">3.额外扣除{{rateFee/100}}元的交易手续费（费率{{m.toFixed2(feeRate*100)}}%）</view>
+        <view class="title2">4.同一个实名用户，单日线上打款金额上限为5000元（此为微信线上打款限制）</view>
+    </view>
+    <button bindtap="onSubmit" class="sure" hoverClass="suredown">确定</button>
+</form>
+<wxs module="m">
+module.exports.toFixed2 = (function(value) {
+    if (value) {
+        return (value.toFixed(2))
+    };
+    return (value)
+});
+</wxs>

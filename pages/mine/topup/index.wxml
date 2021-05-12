@@ -1,0 +1,38 @@
+<view class="header-tips" wx:if="{{rechargeType==5||rechargeType==4}}">
+    <view class="header-tips-title">该优惠仅适用于</view>
+    <view class="special-site">
+        <image src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_dingwei.png"></image>
+        <text>{{siteName}}（专用）</text>
+    </view>
+</view>
+<view class="topup-title" wx:if="{{rechargeType==3||rechargeType==4}}">
+    <image src="../../../icons/myaccount3x.png"></image>
+    <input bindinput="bindInput" class="card-no" disabled="{{avalibleInput}}" maxlength="10" placeholder="请输入10位数卡号" type="number" value="{{cardNo}}"></input>
+</view>
+<view class="topup-wrapper">
+    <view bindtap="ontapTopup" class="topup-amount {{curtopup===index?'active-style':''}}" data-curtopupindex="{{index}}" data-id="{{item.id}}" wx:for="{{topupType}}" wx:key="id">
+        <view>
+            <view class="recharge" style="color:{{curtopup===index?'#fff':''}};">
+                <text class="recharge-num">{{item.rechargeAmount/100}}</text>
+                <text class="recharge-unit">元</text>
+            </view>
+            <view class="give {{curtopup===index?'active-style-give':''}}" wx:if="{{item.bonusAmount>0}}">
+                <view class="give-num">
+          送{{item.bonusAmount/100}}元
+        </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="tips" wx:if="{{(rechargeType==3||rechargeType==4)&&showRechargeTips}}">*为防止卡遗失被盗刷，请确保账户余额小于300，超额将会被锁定，请谨慎操作</view>
+<view class="statement">
+    <checkbox-group bindchange="checkboxChange" class="checkboxGroup">
+        <checkbox checked="{{checked}}" class="checkbox" color="#24c771"></checkbox>
+    </checkbox-group>
+    <text>我已同意</text>
+    <text bindtap="navTotopupagreement" class="statementWrapper">《充值活动协议》</text>
+</view>
+<view class="now-pay">
+    <button bindtap="nowPay" class="oncePay" hoverClass="at-once-pay">{{buttonText}}</button>
+</view>
+<wxs module="format" src="format.wxs" />

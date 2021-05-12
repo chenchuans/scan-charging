@@ -1,0 +1,44 @@
+<view>
+    <view class="card-content"></view>
+    <view class="free-card-list">
+        <view class="free-card" wx:for="{{freeDetailList}}" wx:key="index">
+            <view class="site-name">
+                <image class="site-img" src="../../../../icons/icon_didian.png"></image>
+                <view class="name">
+          {{item.siteName}}
+          <text style="color:{{item.available?'#24c771;':'#999999;'}}">
+            ({{item.available?'可用':'不可用'}})
+          </text>
+                </view>
+            </view>
+            <view class="card-detail">
+                <view class="row-style">
+                    <view class="row-one">充电卡额度</view>
+                    <view class="row-two">已用额度（元）</view>
+                    <view class="row-three">免费额度（元）</view>
+                </view>
+                <view class="row-style">
+                    <view class="row-one">每日限额</view>
+                    <view class="row-two">{{item.dayAmount}}</view>
+                    <view class="row-three">{{item.maxAmountPerDay}}</view>
+                </view>
+                <view class="row-style bg-style">
+                    <view class="row-one">每周限额</view>
+                    <view class="row-two">{{item.weekAmount}}</view>
+                    <view class="row-three">{{item.maxAmountPerWeek}}</view>
+                </view>
+                <view class="row-style">
+                    <view class="row-one">每月限额</view>
+                    <view class="row-two">{{item.monthAmount}}</view>
+                    <view class="row-three">{{item.maxAmountPerMonth}}</view>
+                </view>
+                <view class="row-style bg-style">
+                    <view class="row-one">每年限额</view>
+                    <view class="row-two">{{item.yearAmount}}</view>
+                    <view class="row-three">{{item.maxAmountPerYear}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="tips">使用中如有任何问题请联系客服！</view>
+</view>

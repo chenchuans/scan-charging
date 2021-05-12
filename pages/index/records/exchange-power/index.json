@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "换电记录",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#24c771",
+    "enablePullDownRefresh": false,
+    "usingComponents": {}
+}

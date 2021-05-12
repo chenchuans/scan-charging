@@ -1,0 +1,52 @@
+<view class="all-already-read" wx:if="{{count>0}}">
+    <view bindtap="doAlreadyRead" class="read-but">全部已读</view>
+</view>
+<view wx:if="{{isnull}}">
+    <image src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/%E5%85%85%E7%94%B5%E8%AE%B0%E5%BD%95.png" style="width:467rpx;height:346rpx;margin: 240rpx auto 70rpx auto;display:block; "></image>
+    <view style="text-align:center;color:#3dca76;">暂时没有相关记录</view>
+</view>
+<view class="{{count>0?'list-record show-read':'list-record'}}" wx:if="{{!isnull}}">
+    <view bindtap="navToDetai" class="record-detail" data-recordId="{{item.id}}" wx:for="{{recordList}}" wx:key="id">
+        <view class="recordwrapper">
+            <view class="logo">
+                <text class="iconfont icon-dingwei"></text>
+            </view>
+            <view class="content ">
+                <view class="area clearfloat">
+                    <view class="inline">
+                        <view class="areaname">{{item.site}}</view>
+                        <view class="deductions">
+              {{item.consumeAmount>0?item.consumeAmount/100:item.consumeAmount/100}}
+            </view>
+                    </view>
+                </view>
+                <view class="recordcreatime">
+                    <text class="detailaddr">{{item.location}}</text>
+                    <text class="thattime">{{item.time}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="feedbackRenewal" hidden="{{flag}}">
+            <image class="vehicle-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/{{item.vehicleType==1?'icon_biaoqian_diandongche':'icon_biaoqian_qiche'}}.png" wx:if="{{showEV}}"></image>
+            <view class="feedbackRenewalBtns">
+                <view class="conChargeView">
+                    <view catchtap="continueCharge" class="conCharge" data-pileid="{{item.pileId}}" data-pileno="{{item.pileNo}}" data-port="{{item.port}}" wx:if="{{item.vehicleType===1&&item.continueChargeEnable}}">
+            续充
+          </view>
+                </view>
+                <view catchtap="feedbackAlready" class="alFeedback conalr" data-commentstatus="{{item.commentStatus}}" data-id="{{item.id}}">
+          {{item.commentStatus==-1?'未反馈':'已反馈'}}
+          <text class="redPoint" wx:if="{{item.commentStatus==1}}"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="tips1" wx:if="{{!isnull}}">
+    <view class="refresh-block" wx:if="{{loading}}">
+        <image animation="{{refreshAnimation}}" class="loadpng" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/loader.png"></image>
+    </view>
+    <view class="nocontent" wx:if="{{hasMore}}">
+        <text>没有更多内容了</text>
+    </view>
+</view>

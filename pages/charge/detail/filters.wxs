@@ -1,0 +1,9 @@
+var filters = ({
+    toFix: (function(value, len) {
+        len = undefined === len ? 2 : len;
+        return (value.toFixed(len))
+    }),
+});
+module.exports = ({
+    toFix: filters.toFix,
+});

@@ -1,0 +1,10 @@
+module.exports = {
+    NO_CHARGING: 0,
+    WAIT_CHARGE: 1,
+    WAIT_NOTICE: 2,
+    CHARGING: 3,
+    CHARG_SUSPEND: 4,
+    CHARG_FINISH: 5,
+    CHARG_STARTING: 6,
+    CHARG_POWER: 7
+};

@@ -1,0 +1,40 @@
+<view class="page">
+    <form bindreset="formReset" bindsubmit="formSubmit">
+        <view class="sitename">
+            <label class="sitename-label">充电卡号</label>
+            <input bindinput="getChargeNum" class="sitename-input" maxlength="10" name="cardNo" placeholder="请输入卡号" placeholderClass="input-placeholder" type="number" value="{{cardNo}}"></input>
+        </view>
+        <view class="keyphone">
+            <label>预留号码</label>
+            <input bindinput="mobileInputEvent" class="contact-input" cursorSpacing="20" disabled="{{phoneDisabled}}" maxlength="11" name="phone" placeholder="绑定预留号码" placeholderClass="input-placeholder" type="number" value="{{telePhone}}"></input>
+            <text bindtap="getVerificationCode" class="{{canGetCode?'contact-get-code':'count-down-now'}}" id="{{canGetCode?'contactgetcode':'countdownnow'}}">{{time}}
+      </text>
+        </view>
+        <view class="code">
+            <label>验证码</label>
+            <view class="code-child">
+                <input class="code-input" cursorSpacing="20" name="captcha" placeholder="请输入验证码" placeholderClass="input-placeholder" type="number"></input>
+            </view>
+        </view>
+        <view class="power-rate" wx:if="{{!isFreeCard}}">
+            <label class="power-rate-label">充值金额</label>
+            <picker bindchange="bindPowerChange" class="power-rate-picker" id="region" mode="selector" range="{{Activationtypelist}}" rangeKey="{{'showtext'}}">
+                <view class="power-rate-wrapper">
+                    <input class="power-rate-input" disabled="true" placeholder="请选择金额" placeholderClass="input-placeholder" value="{{showActivation}}"></input>
+                    <view class="unit">
+                        <text>元</text>
+                        <label class="iconfont icon-youjiantou"></label>
+                    </view>
+                </view>
+            </picker>
+        </view>
+        <view class="statement">
+            <checkbox-group bindchange="checkboxChange" class="checkboxGroup">
+                <checkbox checked="{{checked}}" class="checkbox" color="#24c771"></checkbox>
+            </checkbox-group>
+            <text>我已同意</text>
+            <text bindtap="navTotopupagreement" class="statementWrapper">《充值活动协议》</text>
+        </view>
+        <button class="my-submit" formType="submit" hoverClass="my-submit-down">添加</button>
+    </form>
+</view>

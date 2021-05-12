@@ -1,0 +1,7 @@
+<view style="text-align:center;">
+    <image class="site" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/site.png"></image>
+    <view class="text1">资料提交成功!</view>
+    <view class="text2">感谢您选择{{appName}}</view>
+    <view class="text3">我们将在2个工作日内回复您审核结果</view>
+</view>
+<navigator class="back" hoverClass="back-hover" openType="reLaunch" url="/pages/index/index">返回首页</navigator>

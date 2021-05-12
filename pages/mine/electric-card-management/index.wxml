@@ -1,0 +1,123 @@
+<view class="cardsimple">
+    <view class="cardtotal">
+        <text>我的卡(共{{cardList.length}}张)</text>
+        <image bindtap="bindCardTips" class="addcarddoubt" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_weit.png"></image>
+    </view>
+    <view bindtap="navtoAddElecard" class="newcard">绑定</view>
+</view>
+<view bindtap="closeMask" class="mask" wx:if="{{isShowMask}}"></view>
+<view class="bank-cardno" wx:if="{{isShowBankCardNo}}">
+  {{format.format(bankCardNo)}}
+</view>
+<view class="manager-content">
+    <view class="manager" wx:for="{{cardList}}" wx:key="id">
+        <view class=" {{index+1==selectedList[index]?'carditem':'carditemblock'}}" style="background-image:url(http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/bg_{{item.bankCardNo?'yinhang':item.vehicleType==1?'diandongche':'qiche'}}.png);">
+            <view class="top">
+                <view class="lf">
+                    <image src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_logo_{{item.bankCardNo?'yinhang':item.vehicleType==1?'daindongche':'qiche'}}.png"></image>
+                    <view class="sb">
+                        <view>
+              {{item.bankCardNo?'银行电卡':item.type==3?item.siteName:item.vehicleType==1?'电动车充电卡':'电动汽车充电卡'}}
+            </view>
+                        <view class="address" wx:if="{{item.type==3}}">{{item.type==3?item.address:''}}</view>
+                        <view catchtap="showRange" class="use-range" data-cardsite="{{item.cardSite}}" data-id="{{item.id}}" wx:else>
+              适用范围：{{item.cardSite?'指定站点':'通用'}}
+              <view class="iconfont icon-youjiantou"></view>
+                        </view>
+                    </view>
+                </view>
+                <view class="rg">
+                    <view class="cen">{{format.format(item.cardNo)}}</view>
+                    <view class="card-status">{{item.type==1?'在线卡':item.type==2?'离线卡':item.type==3?'专用卡':''}}
+          </view>
+                </view>
+            </view>
+            <view class="bot">
+                <block wx:if="{{!item.bankCardNo}}">
+                    <span class="font24" wx:if="{{item.type==1&&item.tagging==3}}">免费月卡</span>
+                    <span class="font24" wx:elif="{{item.type==1&&item.tagging==4}}">免费次卡</span>
+                    <span class="card-money" wx:else>
+            {{item.amount/100}}
+            <span class="font24">元</span>
+                    </span>
+                </block>
+                <view style="width: 10rpx;" wx:if="{{item.bankCardNo}}"></view>
+                <view catchtap="changeName" class="iconfont {{index+1==selectedList[index]?'icon-up':'icon-down'}}" data-index="{{index}}"></view>
+            </view>
+        </view>
+        <view style="display:{{index+1==selectedList[index]?'block':'none'}};">
+            <view class="cardfunction">
+                <view bindtap="searchRecord" class="rollout" data-cardNo="{{item.cardNo}}" wx:if="{{item.type!=2||item.bankCardNo}}">
+          记录
+        </view>
+                <view bindtap="showbankCardNo" class="rollout" data-bankCardNo="{{item.bankCardNo}}" wx:if="{{item.bankCardNo}}">银行卡号</view>
+                <block wx:if="{{!item.bankCardNo}}">
+                    <view bindtap="navtoTopup" class="defaultcardTop" data-activityEnable="{{item.activityEnable}}" data-cardno="{{item.cardNo}}" data-siteid="{{item.siteId}}" data-type="{{item.type}}" wx:if="{{item.tagging!=3&&item.tagging!=4}}">
+            充值
+          </view>
+                    <view bindtap="showCardDetail" class="rollout" data-id="{{item.id}}" wx:if="{{item.tagging==3||item.tagging==4}}">
+            详情查看
+          </view>
+                    <view bindtap="controlmoresuspension" class="more" data-i="{{index}}" data-moreShowStau="{{item.moreShowStau}}" wx:if="{{item.type!=2&&item.tagging!=3&&item.tagging!=4}}">
+            更多
+          </view>
+                    <view bindtap="Delete" class="rollout" data-cardNo="{{item.cardNo}}" data-delId="{{item.id}}" wx:else>
+            解绑
+          </view>
+                </block>
+                <view class="moresuspension" wx:if="{{item.moreShowStau}}">
+                    <view class="in">
+                        <view bindtap="rollIn" class="shiftto" data-Id="{{item.id}}" data-cardnum="{{format.format(item.cardNo)}}" wx:if="{{item.type==1&&item.tagging!=3&&item.tagging!=4&&item.tagging!=2}}">
+              转入
+            </view>
+                        <view bindtap="backto" class="loss" data-Id="{{item.id}}" data-cardNo="{{item.cardNo}}" wx:if="{{item.status==2}}">
+              找回
+            </view>
+                        <view bindtap="loss" class="loss" data-Id="{{item.id}}" data-cardNo="{{item.cardNo}}" wx:elif="{{item.type!=2&&item.tagging!=3&&item.tagging!=4}}">
+              挂失
+            </view>
+                        <view bindtap="Delete" class="delete" data-cardNo="{{item.cardNo}}" data-delId="{{item.id}}">
+              解绑
+            </view>
+                        <view bindtap="rollOut" class="loss" data-Id="{{item.id}}" data-availablebalance="{{item.amount}}" data-cardnum="{{format.format(item.cardNo)}}" wx:if="{{item.type==1&&item.tagging!=3&&item.tagging!=4&&item.tagging!=2}}">
+              转出
+            </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="navtoBuyEntitycard" class="item1">
+    <view class="infotype">购买电卡</view>
+    <view class="iconfont icon-youjiantou"></view>
+</view>
+<view bindtap="navtoSubStitute" class="item">
+    <view class="infotype">代充值</view>
+    <view class="iconfont icon-youjiantou"></view>
+</view>
+<view class="content" wx:if="{{showcardmodal}}">
+    <view class="the-title">
+        <view bindtap="maskhide" class="close">
+            <image src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/close.png"></image>
+        </view>
+        <view class="tlt">{{judge==0?'电卡挂失':'电卡找回'}}</view>
+    </view>
+    <form bindreset="formReset" bindsubmit="formSubmit">
+        <view class="keyphone">
+            <input bindinput="mobileInputEvent" class="contact-input" cursorSpacing="20" maxlength="11" name="phone" placeholder="请输入手机号码" placeholderClass="input-placeholder" type="number" value="{{phone}}"></input>
+        </view>
+        <view class="code">
+            <view class="codechild">
+                <input class="code-input" cursorSpacing="20" name="captcha" placeholder="请输入验证码" placeholderClass="input-placeholder" type="number" value="{{captcha}}"></input>
+            </view>
+            <span bindtap="getVerificationCode" class="{{VerificationCode?'contactgetcode':'countdownnow'}}" id="{{VerificationCode?'contactgetcode':'countdownnow'}}">
+          {{time}}
+        </span>
+        </view>
+        <view class="covermysubmit">
+            <button class="mysubmit" formType="submit" hoverClass="mysubmitdown">确定</button>
+        </view>
+    </form>
+</view>
+<wxs module="format" src="format.wxs" />

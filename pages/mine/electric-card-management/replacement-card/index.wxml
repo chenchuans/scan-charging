@@ -1,0 +1,5 @@
+<view class="cardname">
+    <image src="../../../../icons/myaccount3x.png"></image>
+    <input bindinput="getCardNo" class="cardname-input" maxlength="10" placeholder="请输入10位卡号" type="number" value="{{viewCardNum}}"></input>
+</view>
+<view bindtap="nextStep" class="next">下一步</view>
