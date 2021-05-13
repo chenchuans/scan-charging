@@ -69,7 +69,7 @@ Page({
     onReachBottom: function() {
         this.data.loading || (this.setData({
             loading: !0
-        }), this.getNextChargerecord());
+        }), this.getNextChargecord());
     },
     navToDetai: function(t) {
         this.data.flag || wx.navigateTo({
@@ -107,7 +107,7 @@ Page({
             }
         });
     },
-    getNextChargerecord: function() {
+    getNextChargecord: function() {
         var a = this;
         this.data.hasMore ? this.setData({
             loading: !1

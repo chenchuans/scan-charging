@@ -88,7 +88,6 @@
     <view class="welcome-content">
         <view class="pic-wrap">
             <image bindtap="jump" class="picture-size" data-ad="{{adContent}}" mode="widthFix" src="{{adContent.imgUrl}}"></image>
-            <view class="add-statement">广告推广</view>
             <view class="close-time">{{closeTime}}S</view>
         </view>
         <image bindtap="hidePicture" class="close-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_guanbi2x.png"></image>
@@ -112,12 +111,8 @@
             <image class="no-load-warning" src="../../../icons/icon-weixian.png"></image>
             <text class="no-load-warning-text {{warnTextColor}}">未检测到负载！</text>
         </view>
-        <button catchtap="checkCharge" class="no-load-but no-load-top-but {{restartTimes?'':'no-click'}}">
-      {{showRestartText}}
-    </button>
+        <button catchtap="checkCharge" class="no-load-but no-load-top-but {{restartTimes?'':'no-click'}}">{{showRestartText}}</button>
         <button catchtap="endAndChangePort" class="no-load-but no-load-bot-but">结束，我要更换端口充电</button>
     </view>
 </view>
-<image bindtap="jump" class="bottom-add" data-ad="{{adContent1}}" mode="widthFix" src="{{adContent1.imgUrl}}" wx:if="{{adContent1.imgUrl}}">
-    <view class="add-statement">广告推广</view>
-</image>
+<image bindtap="jump" class="bottom-add" data-ad="{{adContent1}}" mode="widthFix" src="{{adContent1.imgUrl}}" wx:if="{{adContent1.imgUrl}}"></image>

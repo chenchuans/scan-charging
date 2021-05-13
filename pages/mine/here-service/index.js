@@ -6,7 +6,7 @@ Page({
         videoshow: !1,
         closebutton: !1,
         startbutton: !0,
-        isHasVideo: !0,
+        isHasVideo: !1,
         miniType: 1,
         customerServicePhone: ""
     },

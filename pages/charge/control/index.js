@@ -53,24 +53,24 @@ Page({
     onLoad: function(e) {
         var o = this;
         this.getAdImg();
-        var r = JSON.parse(decodeURIComponent(wx.getStorageSync("pileDetail")));
-        this.curPileTimeInfo = wx.getStorageSync("curPileTimeInfo"), console.log(r), this.setData({
-            siteName: r.siteName,
-            siteAddress: r.siteAddress,
-            pileNo: r.pileNo,
+        var i = JSON.parse(decodeURIComponent(wx.getStorageSync("pileDetail")));
+        this.curPileTimeInfo = wx.getStorageSync("curPileTimeInfo"), console.log(i), this.setData({
+            siteName: i.siteName,
+            siteAddress: i.siteAddress,
+            pileNo: i.pileNo,
             portNum: this.curPileTimeInfo.port,
-            pileAddress: r.pileAddress
+            pileAddress: i.pileAddress
         }), this.recordId = wx.getStorageSync("recordId"), t.setChagePageShowing(!0);
-        var i = t.getChargeStatus();
+        var r = t.getChargeStatus();
         t.registeChargeStatusCallback(a.CHARG_POWER, function(t) {
             t && t.power && o.setData({
                 power: t.power
             }), o.setData({
                 suspendstyle: !0
             }), o.renderPageForCharging();
-        }), i != a.WAIT_CHARGE && i != a.CHARGING || this.renderRunStatus(), i == a.WAIT_NOTICE && t.registeListenDoneCallback(function() {
+        }), r != a.WAIT_CHARGE && r != a.CHARGING || this.renderRunStatus(), r == a.WAIT_NOTICE && t.registeListenDoneCallback(function() {
             o.renderRunStatus();
-        }), i == a.CHARG_STARTING && (this.renderPageForChargeStarting(), this.renderRunStatus()), 
+        }), r == a.CHARG_STARTING && (this.renderPageForChargeStarting(), this.renderRunStatus()), 
         t.registeChargeStatusCallback(a.WAIT_CHARGE, function() {
             o.renderPageForWaitCharge(), o.renderRunStatus();
         }), t.registeChargeStatusCallback(a.CHARGING, function(t) {
@@ -177,12 +177,11 @@ Page({
     },
     jump: function(t) {
         var a = t.currentTarget.dataset.ad, o = a.type;
-        1 != o && (a.operator || e.post({
+        1 != o && (2 == a.origin && e.post({
             url: "/banner/clickBanner",
             requireAuth: !0,
             data: {
-                id: a.id,
-                outerId: a.outerId
+                id: a.id
             }
         }), 3 == o ? wx.navigateTo({
             url: "/pages/index/outurl/index?url=" + a.linkUrl

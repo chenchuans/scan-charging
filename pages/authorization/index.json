@@ -1,6 +1,6 @@
 {
     "usingComponents": {
-        "register": "../../comps/register/index"
+        "register": "../../components/register/index"
     },
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#24c771"

@@ -7,7 +7,6 @@
     "pages/index/charging-order/index",
     "pages/index/collection/index",
     "pages/index/records/index",
-    "pages/index/records/exchange-power/index",
     "pages/index/records/detail/index",
     "pages/index/records/evaluate/index",
     "pages/authorization/index",
@@ -37,7 +36,6 @@
     "pages/near/near-piles/index",
     "pages/near/site-detail/index",
     "pages/charge/detail/index",
-    "pages/charge/exchange/index",
     "pages/charge/control/index",
     "pages/charge/ev-control/index",
     "pages/charge/balance/index",
@@ -45,34 +43,34 @@
     "pages/apply/master/index"
   ],
   "page": {
-    "pages/index/index.html": {
+    "pages/index/index": {
       "window": {
         "navigationBarTextStyle": "white",
         "usingComponents": {}
       }
     },
-    "pages/index/rich-text/index.html": {
+    "pages/index/rich-text/index": {
       "window": {
         "navigationBarTitleText": "消息内容",
         "navigationBarTextStyle": "white",
         "usingComponents": {}
       }
     },
-    "pages/index/outurl/index.html": {
+    "pages/index/outurl/index": {
       "window": {
         "usingComponents": {},
         "disableScroll": true,
         "enablePullDownRefresh": false
       }
     },
-    "pages/index/charging-order/index.html": {
+    "pages/index/charging-order/index": {
       "window": {
         "navigationBarTitleText": "充电中订单",
         "navigationBarTextStyle": "white",
         "usingComponents": {}
       }
     },
-    "pages/index/collection/index.html": {
+    "pages/index/collection/index": {
       "window": {
         "navigationBarTitleText": "我的收藏",
         "navigationBarTextStyle": "white",
@@ -80,7 +78,7 @@
         "usingComponents": {}
       }
     },
-    "pages/index/records/index.html": {
+    "pages/index/records/index": {
       "window": {
         "navigationBarTitleText": "充电记录",
         "navigationBarTextStyle": "white",
@@ -89,16 +87,7 @@
         "usingComponents": {}
       }
     },
-    "pages/index/records/exchange-power/index.html": {
-      "window": {
-        "navigationBarTitleText": "换电记录",
-        "navigationBarTextStyle": "white",
-        "navigationBarBackgroundColor": "#24c771",
-        "enablePullDownRefresh": false,
-        "usingComponents": {}
-      }
-    },
-    "pages/index/records/detail/index.html": {
+    "pages/index/records/detail/index": {
       "window": {
         "navigationBarTitleText": "订单详情",
         "navigationBarTextStyle": "white",
@@ -106,7 +95,7 @@
         "usingComponents": {}
       }
     },
-    "pages/index/records/evaluate/index.html": {
+    "pages/index/records/evaluate/index": {
       "window": {
         "navigationBarTitleText": "订单反馈",
         "navigationBarTextStyle": "white",
@@ -114,26 +103,26 @@
         "usingComponents": {}
       }
     },
-    "pages/authorization/index.html": {
+    "pages/authorization/index": {
       "window": {
         "usingComponents": {
-          "register": "../../comps/register/index"
+          "register": "../../components/register/index"
         },
         "navigationBarTextStyle": "white",
         "navigationBarBackgroundColor": "#24c771"
       }
     },
-    "pages/mine/index.html": {
+    "pages/mine/index": {
       "window": {
         "usingComponents": {
-          "register": "../../comps/register/index"
+          "register": "../../components/register/index"
         },
         "navigationBarTitleText": "个人中心",
         "navigationBarTextStyle": "white",
         "navigationBarBackgroundColor": "#24c771"
       }
     },
-    "pages/mine/version/index.html": {
+    "pages/mine/version/index": {
       "window": {
         "navigationBarTitleText": "版本信息",
         "navigationBarTextStyle": "white",
@@ -141,7 +130,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/withdrawal/index.html": {
+    "pages/mine/withdrawal/index": {
       "window": {
         "navigationBarTitleText": "提现",
         "navigationBarTextStyle": "white",
@@ -149,7 +138,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/user-card/index.html": {
+    "pages/mine/user-card/index": {
       "window": {
         "navigationBarTitleText": "充电账户总额",
         "navigationBarTextStyle": "white",
@@ -157,7 +146,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/user-card/available-pile/index.html": {
+    "pages/mine/user-card/available-pile/index": {
       "window": {
         "navigationBarTitleText": "可用桩点",
         "navigationBarTextStyle": "white",
@@ -165,7 +154,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/user-card/recharge-card/index.html": {
+    "pages/mine/user-card/recharge-card/index": {
       "window": {
         "navigationBarTitleText": "专用账户充值",
         "navigationBarTextStyle": "white",
@@ -173,7 +162,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/user-card/card-explain/index.html": {
+    "pages/mine/user-card/card-explain/index": {
       "window": {
         "navigationBarTitleText": "专用账户说明",
         "navigationBarTextStyle": "white",
@@ -181,7 +170,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/electric-card-management/index.html": {
+    "pages/mine/electric-card-management/index": {
       "window": {
         "navigationBarTitleText": "电卡管理",
         "navigationBarTextStyle": "white",
@@ -189,7 +178,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/electric-card-management/activation-card/index.html": {
+    "pages/mine/electric-card-management/activation-card/index": {
       "window": {
         "navigationBarTitleText": "添加电卡",
         "navigationBarTextStyle": "white",
@@ -197,7 +186,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/electric-card-management/add-electric-card/index.html": {
+    "pages/mine/electric-card-management/add-electric-card/index": {
       "window": {
         "navigationBarTitleText": "添加充电卡",
         "navigationBarTextStyle": "white",
@@ -205,7 +194,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/electric-card-management/rollinorout/index.html": {
+    "pages/mine/electric-card-management/rollinorout/index": {
       "window": {
         "navigationBarTitleText": "",
         "navigationBarTextStyle": "white",
@@ -213,14 +202,14 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/electric-card-management/buy-entity-card/cardorder/index.html": {
+    "pages/mine/electric-card-management/buy-entity-card/cardorder/index": {
       "window": {
         "navigationBarTitleText": "订单详情",
         "navigationBarBackgroundColor": "#fff",
         "usingComponents": {}
       }
     },
-    "pages/mine/electric-card-management/buy-entity-card/success/index.html": {
+    "pages/mine/electric-card-management/buy-entity-card/success/index": {
       "window": {
         "navigationBarTextStyle": "white",
         "navigationBarTitleText": "电卡购买成功",
@@ -228,7 +217,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/electric-card-management/replacement-card/index.html": {
+    "pages/mine/electric-card-management/replacement-card/index": {
       "window": {
         "navigationBarTitleText": "代充充值卡",
         "navigationBarTextStyle": "white",
@@ -236,7 +225,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/electric-card-management/free-card-detail/index.html": {
+    "pages/mine/electric-card-management/free-card-detail/index": {
       "window": {
         "navigationBarTitleText": "免费卡详情",
         "navigationBarTextStyle": "white",
@@ -244,7 +233,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/electric-card-management/card-avaliable-site/index.html": {
+    "pages/mine/electric-card-management/card-avaliable-site/index": {
       "window": {
         "navigationBarTitleText": "附近充电站",
         "navigationBarTextStyle": "white",
@@ -252,14 +241,14 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/topup/index.html": {
+    "pages/mine/topup/index": {
       "window": {
         "navigationBarTextStyle": "white",
         "navigationBarBackgroundColor": "#24c771",
         "usingComponents": {}
       }
     },
-    "pages/mine/topup/topup-agreement/index.html": {
+    "pages/mine/topup/topup-agreement/index": {
       "window": {
         "navigationBarTitleText": "充值协议",
         "navigationBarTextStyle": "white",
@@ -267,7 +256,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/here-service/index.html": {
+    "pages/mine/here-service/index": {
       "window": {
         "navigationBarTitleText": "帮助",
         "navigationBarTextStyle": "white",
@@ -275,7 +264,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/fault-repair/index.html": {
+    "pages/mine/fault-repair/index": {
       "window": {
         "navigationBarTitleText": "故障报修",
         "navigationBarTextStyle": "white",
@@ -283,7 +272,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/official-account/index.html": {
+    "pages/mine/official-account/index": {
       "window": {
         "navigationBarTitleText": "关注公众号",
         "navigationBarTextStyle": "white",
@@ -291,7 +280,7 @@
         "usingComponents": {}
       }
     },
-    "pages/mine/agent-admin/index.html": {
+    "pages/mine/agent-admin/index": {
       "window": {
         "usingComponents": {},
         "navigationBarTitleText": "商户管理平台",
@@ -299,7 +288,7 @@
         "navigationBarBackgroundColor": "#246cff"
       }
     },
-    "pages/near/near-site/index.html": {
+    "pages/near/near-site/index": {
       "window": {
         "navigationBarTitleText": "附近充电站",
         "navigationBarTextStyle": "white",
@@ -308,7 +297,7 @@
         "usingComponents": {}
       }
     },
-    "pages/near/near-piles/index.html": {
+    "pages/near/near-piles/index": {
       "window": {
         "navigationBarTitleText": "附近充电桩",
         "navigationBarTextStyle": "white",
@@ -316,7 +305,7 @@
         "usingComponents": {}
       }
     },
-    "pages/near/site-detail/index.html": {
+    "pages/near/site-detail/index": {
       "window": {
         "navigationBarTitleText": "站点详情",
         "navigationBarTextStyle": "white",
@@ -324,7 +313,7 @@
         "usingComponents": {}
       }
     },
-    "pages/charge/detail/index.html": {
+    "pages/charge/detail/index": {
       "window": {
         "navigationBarTitleText": "充电详情",
         "navigationBarTextStyle": "white",
@@ -332,27 +321,19 @@
         "usingComponents": {}
       }
     },
-    "pages/charge/exchange/index.html": {
-      "window": {
-        "navigationBarTitleText": "换电详情",
-        "navigationBarTextStyle": "white",
-        "navigationBarBackgroundColor": "#24c771",
-        "usingComponents": {}
-      }
-    },
-    "pages/charge/control/index.html": {
+    "pages/charge/control/index": {
       "window": {
         "navigationBarTitleText": "充电控制",
         "usingComponents": {}
       }
     },
-    "pages/charge/ev-control/index.html": {
+    "pages/charge/ev-control/index": {
       "window": {
-        "navigationStyle": "custom",
+        "navigationBarTitleText": "充电控制",
         "usingComponents": {}
       }
     },
-    "pages/charge/balance/index.html": {
+    "pages/charge/balance/index": {
       "window": {
         "navigationBarTitleText": "我的余额",
         "navigationBarTextStyle": "white",
@@ -360,7 +341,7 @@
         "usingComponents": {}
       }
     },
-    "pages/apply/complete/index.html": {
+    "pages/apply/complete/index": {
       "window": {
         "navigationBarTitleText": "充电桩管理",
         "navigationBarTextStyle": "white",
@@ -368,7 +349,7 @@
         "usingComponents": {}
       }
     },
-    "pages/apply/master/index.html": {
+    "pages/apply/master/index": {
       "window": {
         "navigationBarTitleText": "申请合作",
         "navigationBarTextStyle": "white",

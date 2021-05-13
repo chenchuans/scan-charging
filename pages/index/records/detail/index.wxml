@@ -49,7 +49,7 @@
     </view>
 </block>
 <view bindtap="payment" class="payoutstandinorder" wx:if="{{outstandinorder&&status==2}}">立即支付</view>
-<view bindtap="continueCharge" class="payoutstandinorder" wx:if="{{!outstandinorder&&orderDetail.continueChargeEnable&&orderDetail.vehicleType===1}}">
+<view bindtap="continueCharge" class="payoutstandinorder" wx:if="{{!outstandinorder&&orderDetail.continueChargeEnable}}">
   续充
 </view>
 <view bindtap="evaluate" class="payoutstandinorder" wx:if="{{!discuss}}">反馈</view>
@@ -61,12 +61,9 @@
         <view class="pic-wrap">
             <image bindtap="jump" class="picture-size" data-ad="{{adContent}}" mode="widthFix" src="{{adContent.imgUrl}}"></image>
             <view class="close-time">{{closeTime}}S</view>
-            <view class="add-statement">广告推广</view>
         </view>
         <image bindtap="hidePicture" class="close-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_guanbi2x.png"></image>
     </view>
 </view>
-<image bindtap="jump" class="bottom-add" data-ad="{{adContent1}}" mode="widthFix" src="{{adContent1.imgUrl}}" wx:if="{{adContent1.imgUrl}}">
-    <view class="add-statement">广告推广</view>
-</image>
+<image bindtap="jump" class="bottom-add" data-ad="{{adContent1}}" mode="widthFix" src="{{adContent1.imgUrl}}" wx:if="{{adContent1.imgUrl}}"></image>
 <wxs module="format" src="format.wxs" />

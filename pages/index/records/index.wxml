@@ -29,8 +29,8 @@
         <view class="feedbackRenewal" hidden="{{flag}}">
             <image class="vehicle-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/{{item.vehicleType==1?'icon_biaoqian_diandongche':'icon_biaoqian_qiche'}}.png" wx:if="{{showEV}}"></image>
             <view class="feedbackRenewalBtns">
-                <view class="conChargeView">
-                    <view catchtap="continueCharge" class="conCharge" data-pileid="{{item.pileId}}" data-pileno="{{item.pileNo}}" data-port="{{item.port}}" wx:if="{{item.vehicleType===1&&item.continueChargeEnable}}">
+                <view class="conChargeView" wx:if="{{item.continueChargeEnable}}">
+                    <view catchtap="continueCharge" class="conCharge" data-pileid="{{item.pileId}}" data-pileno="{{item.pileNo}}" data-port="{{item.port}}">
             续充
           </view>
                 </view>

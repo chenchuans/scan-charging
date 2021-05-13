@@ -1,4 +1,4 @@
-<form catchsubmit="nowCharge" onSubmit="nowCharge" reportSubmit="true">
+<form reportSubmit="true">
     <view class="equipment">
         <view>设备编号</view>
         <view class="collected-num">
@@ -46,7 +46,7 @@
         </view>
     </view>
     <block wx:if="{{pileStatus===1}}">
-        <view class="time-picker" hidden="{{optType==3&&price==0&&feeType!=3}}">
+        <view class="time-picker" hidden="{{optType==3&&price==0&&minAmount==0&&feeType!=3}}">
             <label class="time-picker-title">{{optType==1?'预充时间':optType==2?'预充电量':'预充金额'}}</label>
             <picker bindchange="bindtimeChange" mode="selector" range="{{timeLength}}" rangeKey="{{'label'}}" value="{{pickIndex}}">
                 <view class="picker">
@@ -66,16 +66,6 @@
                     <text class="yuan">元</text>
                     <label class="iconfont icon-youjiantou shoicon"></label>
                 </view>
-            </view>
-        </view>
-        <view bindtap="choosePaymentMethod" class="show-pay-money" hidden="{{price==0&&feeType!=3}}">
-            <label>
-        支付方式
-      </label>
-            <view class="choose-payment">
-                <image class="payment-logo" mode="widthFix" src="{{chooseWhichPayment==3?miniPayLogo:chooseWhichPayment==1?'https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/yue2x.png':'https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_Specialaccount2x.png'}}"></image>
-                <text>{{chooseWhichPayment==3?miniPayName:chooseWhichPayment==1?'余额账户':'专用账户'}}</text>
-                <label class="iconfont icon-youjiantou"></label>
             </view>
         </view>
     </block>
@@ -126,8 +116,17 @@
             </view>
         </view>
     </view>
-    <button class="payPoint" formType="submit" hoverClass="payPointDown">立即充电</button>
-    <button bindtap="exchange" class="payPoint" hoverClass="payPointDown" wx:if="{{showExchange}}">去换电</button>
+    <view bindtap="choosePaymentMethod" class="show-pay-money" hidden="{{optType==3&&price==0&&minAmount==0&&feeType!=3}}">
+        <label>
+      支付方式
+    </label>
+        <view class="choose-payment">
+            <image class="payment-logo" mode="widthFix" src="{{chooseWhichPayment==3?miniPayLogo:chooseWhichPayment==1?'https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/yue2x.png':'https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_Specialaccount2x.png'}}"></image>
+            <text>{{chooseWhichPayment==3?miniPayName:chooseWhichPayment==1?'余额账户':'专用账户'}}</text>
+            <label class="iconfont icon-youjiantou"></label>
+        </view>
+    </view>
+    <button bindtap="nowChargine" class="payPoint" hoverClass="payPointDown">立即充电</button>
     <view class="charge-tips-wrap" wx:if="{{chargeTips}}">
         <view style="color:red;" wx:if="{{chargeTips}}">*</view>
         <rich-text class="charge-tips" nodes="{{chargeTips}}"></rich-text>
@@ -147,7 +146,6 @@
     <view class="welcome-content">
         <view class="pic-wrap">
             <image bindtap="jump" class="picture-size" mode="widthFix" src="{{adContent.imgUrl}}"></image>
-            <view class="add-statement">广告推广</view>
             <view class="close-time">{{closeTime}}S</view>
         </view>
         <image bindtap="hidePicture" class="close-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_guanbi2x.png"></image>

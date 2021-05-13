@@ -2,7 +2,7 @@ var t = function(t) {
     return t && t.__esModule ? t : {
         default: t
     };
-}(require("../../../../utils/zfb_charts.js")), a = require("../../../../utils/http.js"), e = getApp(), i = require("../../../../utils/wx_charts.js"), n = null, s = 0;
+}(require("../../../../utils/zfb_charts.js")), a = require("../../../../utils/http.js"), e = getApp(), i = require("../../../../utils/wx_charts.js"), s = null, n = 0;
 
 Page({
     data: {
@@ -34,7 +34,7 @@ Page({
             isWeChat: 1 == a
         }), this.setData({
             imageWidth: wx.getSystemInfoSync().windowWidth
-        }), s = this.data.imageWidth / 375, t.minejump) {
+        }), n = this.data.imageWidth / 375, t.minejump) {
             var e = "false" != t.minejump && "";
             this.setData({
                 minejump: e
@@ -52,7 +52,7 @@ Page({
         }), wx.setNavigationBarColor({
             frontColor: "#ffffff",
             backgroundColor: "#24c771"
-        }), this.getRecoedInfo(), this.cWidth = 750, this.cHeight = 500, this.pixelRatio = 2, 
+        }), this.getRecoedinfo(), this.cWidth = 750, this.cHeight = 500, this.pixelRatio = 2, 
         this.drawPowerChart();
     },
     getAdImg: function() {
@@ -108,25 +108,6 @@ Page({
             }
         });
     },
-    jump: function(t) {
-        var e = t.currentTarget.dataset.ad, i = e.type;
-        1 != i && (e.operator || a.post({
-            url: "/banner/clickBanner",
-            requireAuth: !0,
-            data: {
-                id: e.id,
-                outerId: e.outerId
-            }
-        }), 3 == i ? wx.navigateTo({
-            url: "/pages/index/outurl/index?url=" + e.linkUrl
-        }) : 2 == i ? wx.navigateToMiniProgram({
-            appId: e.linkUrl,
-            path: e.miniprogramPage || "pages/index/index",
-            success: function(t) {}
-        }) : 4 == i && wx.navigateTo({
-            url: "/pages/index/rich-text/index?richId=" + e.id
-        }));
-    },
     hidePicture: function() {
         clearInterval(this.closeTimer), this.closeTimer = null, this.setData({
             closeTime: 10,
@@ -163,7 +144,7 @@ Page({
             }
         });
     },
-    getRecoedInfo: function() {
+    getRecoedinfo: function() {
         var t = this;
         a.post({
             url: "/charge-record/show/" + this.recordId,
@@ -222,25 +203,25 @@ Page({
             success: function(a) {
                 if (200 === a.statusCode) {
                     if (0 != a.data.length) {
-                        var e = a.data, i = [], n = [], s = [];
+                        var e = a.data, i = [], s = [], n = [];
                         if (t.setData({
                             showCanvas: !0
                         }), t.data.isWeChat) {
-                            for (var o = 0; o < e.length; o++) i.push(e[o].minutePast), n.push(e[o].power);
-                            var r = Math.min.apply(Math, n);
-                            t.doDrawChart(i, n, r);
+                            for (var o = 0; o < e.length; o++) i.push(e[o].minutePast), s.push(e[o].power);
+                            var r = Math.min.apply(Math, s);
+                            t.doDrawChart(i, s, r);
                         } else {
-                            for (var d = 0; d < e.length; d++) i.push(e[d].minutePast), s.push(e[d].power);
+                            for (var d = 0; d < e.length; d++) i.push(e[d].minutePast), n.push(e[d].power);
                             var c = {
                                 name: "充电时间",
-                                data: s
+                                data: n
                             };
-                            n.push(c);
+                            s.push(c);
                             var u = {
                                 categories: [],
                                 series: []
                             };
-                            u.categories = i, u.series = n, t.showColumn("canvasColumn", u);
+                            u.categories = i, u.series = s, t.showColumn("canvasColumn", u);
                         }
                     }
                 } else t.setData({
@@ -302,8 +283,8 @@ Page({
                 },
                 min: 0
             },
-            width: 390 * s,
-            height: 200 * s,
+            width: 390 * n,
+            height: 200 * n,
             dataLabel: !1,
             dataPointShape: !0,
             extra: {
@@ -312,7 +293,7 @@ Page({
         });
     },
     showColumn: function(a, e) {
-        n = new t.default({
+        s = new t.default({
             $this: this,
             canvasId: a,
             type: "line",

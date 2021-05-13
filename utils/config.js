@@ -1,10 +1,10 @@
 var s = {
-    https: "https://wwwsss/ejlchina",
+    https: "https://api-mini.cdyun.vip/ycc",
     wss: "wss://wss.cdyun.vip"
 };
 
 module.exports = {
     endpoint: s,
-    uriPrefix: "ejlchina",
+    uriPrefix: "ycc",
     isTest: !1
 };

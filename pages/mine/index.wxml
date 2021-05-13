@@ -34,7 +34,7 @@
             <view>站点管理</view>
             <view>建桩建站更方便</view>
         </view>
-        <button class="intoWalletBtnproperty">立即查看</button>
+        <view class="intoWalletBtn">立即查看</view>
     </view>
 </block>
 <block wx:if="{{isAgent&&isWeChat}}">
@@ -45,7 +45,7 @@
             <view>代理权益</view>
             <view>账户余额及数据统计等...</view>
         </view>
-        <button bindgetuserinfo="jumpToagentH5" class="intoWalletBtnproperty" openType="getUserInfo">立即体验</button>
+        <button bindgetuserinfo="jumpToagentH5" class="intoWalletBtn" openType="getUserInfo">立即体验</button>
     </view>
 </block>
 <block wx:if="{{property&&isWeChat}}">
@@ -59,38 +59,17 @@
         <button bindgetuserinfo="jumpToPropertyH5" class="intoWalletBtnproperty" openType="getUserInfo">立即查看</button>
     </view>
 </block>
-<view class="list-title">更多推荐</view>
 <view class="more-rec">
     <view bindtap="accountManagement" class="more-rec-item">
         <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_zhanghaoguanli.png"></image>
         <view class="more-rec-item-title">账号管理</view>
     </view>
-    <view bindtap="faultRepair" class="more-rec-item">
-        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_baoxiu.png"></image>
-        <view class="more-rec-item-title">故障报修</view>
-    </view>
-    <view bindtap="contactService" class="more-rec-item">
-        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_kefu.png"></image>
-        <view class="more-rec-item-title">联系客服</view>
-    </view>
-    <view bindtap="showShare" class="more-rec-item" wx:if="{{subscribeEnable&&isWeChat}}">
-        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_gongzhonghao.png"></image>
-        <view class="more-rec-item-title">关注公众号</view>
-    </view>
     <view bindtap="shareBtn" class="more-rec-item" wx:if="{{isWeChat}}">
         <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_fenxiang.png"></image>
-        <view class="more-rec-item-title">我的分享</view>
-    </view>
-    <view bindtap="goFeedback" class="more-rec-item">
-        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_fankui.png"></image>
-        <view class="more-rec-item-title">意见反馈</view>
-    </view>
-    <view bindtap="versionInfo" class="more-rec-item">
-        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_guanyu.png"></image>
-        <view class="more-rec-item-title">版本信息</view>
+        <view class="more-rec-item-title">邀请好友</view>
     </view>
 </view>
-<view class="change-wrapper" wx:if="{{changeUsermodal}}">
+<!-- <view class="change-wrapper" wx:if="{{changeUsermodal}}">
     <view class="change-wrapper-child">
         <view class="change-wrapper-in">
             <view bindtap="changeoPerate" class="x" data-type="2">更换手机号</view>
@@ -98,7 +77,7 @@
             <view bindtap="hideControlChangeUserModal" style="border:none;">取消</view>
         </view>
     </view>
-</view>
+</view> -->
 <view bindtap="hidechangeUsermodal" class="shadow" wx:if="{{changeUsermodal}}"></view>
 <view wx:if="{{changeUserOrPhone}}">
     <register bind:onRegisteSuccess="onRegisteSuccess" bind:shouldCloseRegistDialog="closeRegistDialog" registerType="{{registerType}}"></register>

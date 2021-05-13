@@ -1,29 +1,13 @@
-<view class="ev-control">
+<view>
     <view class="top-view">
-        <view class="title" style="top:{{menuButton.top}}px;height: {{menuButton.height}}px;">
-            <view bindtap="back" class="wrap-img">
-                <image class="back-img" src="../../../icons/icon_fanhui.png"></image>
-            </view>
-            <view class="title-text">充电控制</view>
-            <view class="empty"></view>
-        </view>
-        <veiw class="charged-power" style="top:{{menuButton.top+menuButton.height+20/screenPx}}px;">
-            <view class="charged-power-title">
-        已充电量
-      </view>
-            <view class="charged-power-value">
-                <view>{{chargedPower}}</view>
-                <view class="charged-power-unit">度</view>
-            </view>
-        </veiw>
-        <image class="ev-charging-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/chargin@3x.png"></image>
-    </view>
-    <view class="ev-content">
+        <image class="ev-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/pic_diandongqiche.png"></image>
         <view class="pile-address">
             <image class="address-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_logo_qiche.png"></image>
             <view class="adddress-text">{{siteAddress}}{{pileAddress}}{{pileNo}}号桩{{portNum}}路端口</view>
         </view>
-        <view class="top-params">
+    </view>
+    <view class="ev-content">
+        <view class="ev-params">
             <view class="params-item item1">
                 <view class="item-title">实时电压(V)</view>
                 <view class="item-value">{{realTimeVoltage}}</view>
@@ -33,25 +17,19 @@
                 <view class="item-value">{{realTimeCurrent}}</view>
             </view>
             <view class="params-item item3">
-                <view class="item-title">实时温度(°C))</view>
-                <view class="item-value">{{realTimeTemperature}}</view>
-            </view>
-        </view>
-        <view class="bottom-params">
-            <view class="params-item item4">
                 <view class="item-title">已充时长(分)</view>
                 <view class="item-value">{{Isthetiming}}</view>
             </view>
+            <view class="params-item item4">
+                <view class="item-title">已充电量(度)</view>
+                <view class="item-value">{{chargedPower}}</view>
+            </view>
             <view class="params-item item5">
                 <view class="item-title">已充金额(元)</view>
-                <view class="item-value">{{expectedconsume?expectedconsume:0}}</view>
+                <view class="item-value money">{{expectedconsume?expectedconsume:0}}</view>
             </view>
         </view>
-        <view class="end-charge">
-            <view class="crossed" style="width: {{crossedWidth}}rpx;"></view>
-            <image bindtouchend="touchEnd" bindtouchmove="touchMove" bindtouchstart="touchStart" class="end-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_guanbi.png" style="left:{{leftX}}rpx;"></image>
-            <view>右滑即可结束充电</view>
-        </view>
+        <view bindtap="onButtonClick" class="end-charge">结束充电</view>
     </view>
     <view class="drawer_screen" wx:if="{{showFinshDialogue}}"></view>
     <view class="drawer_screen" wx:if="{{showBreakPower}}"></view>
@@ -80,10 +58,10 @@
         <view class="welcome-content">
             <view class="pic-wrap">
                 <image bindtap="jump" class="picture-size" data-ad="{{adContent}}" mode="widthFix" src="{{adContent.imgUrl}}"></image>
-                <view class="add-statement">广告推广</view>
                 <view class="close-time">{{closeTime}}S</view>
             </view>
             <image bindtap="hidePicture" class="close-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_guanbi2x.png"></image>
         </view>
     </view>
 </view>
+<image bindtap="jump" class="bottom-add" data-ad="{{adContent1}}" mode="widthFix" src="{{adContent1.imgUrl}}" wx:if="{{adContent1.imgUrl}}"></image>

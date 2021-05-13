@@ -1,0 +1,13 @@
+.code-charge-btn {
+  width: 100%;
+  padding: 30rpx;
+  height: 100rpx;
+  box-sizing: border-box;
+  background-color: #24c771;
+  text-align: center;
+  border-radius: 50rpx;
+  margin-top: 100rpx;
+}
+.code-charge-box {
+  color: #fff;
+}

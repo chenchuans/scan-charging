@@ -1,4 +1,4 @@
-var e = getApp(), t = require("../../utils/http.js"), n = require("../../utils/auth.js");
+var e = getApp(), t = require("../../utils/http.js"), a = require("../../utils/auth.js");
 
 Page({
     data: {
@@ -34,35 +34,35 @@ Page({
         });
     },
     bindGetUserInfo: function(e) {
-        var t = this, n = e.detail.userInfo;
-        n.nickName && n.avatarUrl ? this.getUserData(n) : wx.showModal({
+        var t = this, a = e.detail.userInfo;
+        a.nickName && a.avatarUrl ? this.getUserData(a) : wx.showModal({
             title: "提示",
-            content: "为了更好的体验小程序，请确保设置了" + (2 == this.data.miniType ? "支付宝" : "微信") + "账号的昵称和头像！",
+            content: "为了更好的体验小程序，请确保设置了" + ("alipay" === wx.__target__ ? "支付宝" : "微信") + "账号的昵称和头像！",
             showCancel: !1,
             confirmText: "知道啦！",
             success: function(e) {
-                e.confirm ? t.getUserData(n) : e.cancel && t.getUserData(n);
+                e.confirm ? t.getUserData(a) : e.cancel && t.getUserData(a);
             }
         });
     },
     getUserData: function(e) {
-        var a = this;
+        var n = this;
         t.get({
             url: "/user/brief-info",
             requireAuth: !0,
             success: function(t) {
                 if (200 === t.statusCode) {
                     var i = t.data;
-                    e.avatarUrl !== i.avatar || e.nickName !== i.nickname ? a.updateUserInfo(e) : (n.saveUserInfo(i), 
-                    a.redirectToTarget()), n.setAuthorized();
-                } else a.setData({
+                    e.avatarUrl !== i.avatar || e.nickName !== i.nickname ? n.updateUserInfo(e) : (a.saveUserInfo(i), 
+                    n.redirectToTarget()), a.setAuthorized();
+                } else n.setData({
                     phoneBound: !0
-                }), wx.clearStorageSync(), wx.setStorageSync("miniType", a.data.miniType), n.saveUserInfo(e);
+                }), wx.clearStorageSync(), wx.setStorageSync("miniType", n.data.miniType), a.saveUserInfo(e);
             },
             fail: function(t) {
-                a.setData({
+                n.setData({
                     phoneBound: !0
-                }), wx.clearStorageSync(), wx.setStorageSync("miniType", a.data.miniType), n.saveUserInfo(e);
+                }), wx.clearStorageSync(), wx.setStorageSync("miniType", n.data.miniType), a.saveUserInfo(e);
             }
         });
     },
@@ -73,14 +73,14 @@ Page({
             requireAuth: !0,
             success: function(t) {
                 if (200 === t.statusCode) {
-                    var a = t.data;
-                    n.saveUserInfo(a), e.redirectToTarget();
+                    var n = t.data;
+                    a.saveUserInfo(n), e.redirectToTarget();
                 }
             }
         });
     },
     updateUserInfo: function(e) {
-        var n = this;
+        var a = this;
         t.post({
             url: "/user/update",
             requireAuth: !0,
@@ -89,12 +89,12 @@ Page({
                 avatar: e.avatarUrl
             },
             success: function(e) {
-                n.getUserInfo();
+                a.getUserInfo();
             }
         });
     },
     onRegisteSuccess: function() {
-        n.setAuthorized(), this.closeRegistDialog(), this.redirectToTarget();
+        a.setAuthorized(), this.closeRegistDialog(), this.redirectToTarget();
     },
     closeRegistDialog: function() {
         this.setData({

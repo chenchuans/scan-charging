@@ -1,4 +1,4 @@
-var e = getApp(), t = require("../../../utils/http.js"), a = require("../../../utils/constant.js"), i = require("../../../utils/util.js");
+var e = getApp(), t = require("../../../utils/http.js"), a = require("../../../utils/constant.js"), r = require("../../../utils/util.js");
 
 require("../../../utils/client.js");
 
@@ -30,11 +30,7 @@ Page({
         realTimeVoltage: 0,
         realTimeCurrent: 0,
         showBreakPower: !1,
-        closeTime: 10,
-        leftX: 10,
-        crossedWidth: 0,
-        menuButton: null,
-        screenPx: 0
+        closeTime: 10
     },
     closeTimer: null,
     recordId: "",
@@ -53,25 +49,28 @@ Page({
     surplusTime: 0,
     lastSurplusTime: 0,
     timer: null,
-    startX: 0,
-    endX: 0,
     onLoad: function(t) {
-        var i = this;
-        this.setData({
-            menuButton: wx.getMenuButtonBoundingClientRect()
-        }), this.getAdImg();
-        var s = JSON.parse(decodeURIComponent(wx.getStorageSync("pileDetail")));
-        this.curPileTimeInfo = wx.getStorageSync("curPileTimeInfo"), console.log(s), this.setData({
-            siteName: s.siteName,
-            siteAddress: s.siteAddress,
-            pileNo: s.pileNo,
+        var r = this;
+        if (this.getAdImg(), console.log(t.item), t.item) {
+            var i = JSON.parse(decodeURIComponent(t.item));
+            console.log(i), i && this.setData({
+                siteName: i.siteName,
+                siteAddress: i.siteAddress,
+                pileNo: i.pileNo,
+                portNum: i.port
+            });
+        } else this.curPileTimeInfo = wx.getStorageSync("curPileTimeInfo"), this.setData({
+            siteName: wx.getStorageSync("siteName"),
+            siteAddress: wx.getStorageSync("siteAddress"),
+            pileNo: wx.getStorageSync("pileNo"),
             portNum: this.curPileTimeInfo.port,
-            pileAddress: s.pileAddress
-        }), this.recordId = wx.getStorageSync("recordId"), e.setChagePageShowing(!0), this.renderRunStatus(), 
+            pileAddress: wx.getStorageSync("pileAddress")
+        });
+        this.recordId = wx.getStorageSync("recordId"), e.setChagePageShowing(!0), this.renderRunStatus(), 
         e.registeChargeStatusCallback(a.CHARG_POWER, function(e) {
-            i.setData({
+            r.setData({
                 showBreakPower: !1
-            }), e && i.setData({
+            }), e && r.setData({
                 chargedPower: e.quantity,
                 realTimeTemperature: e.temperature,
                 realTimeVoltage: e.voltage,
@@ -79,34 +78,28 @@ Page({
                 expectedconsume: e.amount / 100
             });
         });
-        var r = e.getChargeStatus();
-        r != a.WAIT_CHARGE && r != a.CHARGING || this.renderRunStatus(), r == a.WAIT_NOTICE && e.registeListenDoneCallback(function() {
-            i.renderRunStatus();
-        }), r == a.CHARG_STARTING && (this.renderPageForChargeStarting(), this.renderRunStatus()), 
+        var s = e.getChargeStatus();
+        s != a.WAIT_CHARGE && s != a.CHARGING || this.renderRunStatus(), s == a.WAIT_NOTICE && e.registeListenDoneCallback(function() {
+            r.renderRunStatus();
+        }), s == a.CHARG_STARTING && (this.renderPageForChargeStarting(), this.renderRunStatus()), 
         e.registeChargeStatusCallback(a.WAIT_CHARGE, function() {
-            i.renderPageForWaitCharge(), i.renderRunStatus();
+            r.renderPageForWaitCharge(), r.renderRunStatus();
         }), e.registeChargeStatusCallback(a.CHARGING, function(e) {
-            console.log("获取到功率"), i.setData({
+            console.log("获取到功率"), r.setData({
                 showBreakPower: !1
-            }), e && e.power && i.setData({
+            }), e && e.power && r.setData({
                 power: e.power
-            }), i.renderPageForCharging(), i.renderRunStatus();
+            }), r.renderPageForCharging(), r.renderRunStatus();
         }), e.registeChargeStatusCallback(a.CHARG_SUSPEND, function() {
-            i.setData({
+            r.setData({
                 showBreakPower: !0
-            }), i.renderPageForWaitCharge(), i.suspendStateQuery();
+            }), r.renderPageForWaitCharge(), r.suspendStateQuery();
         }), e.registeChargeStatusCallback(a.CHARG_FINISH, function(e) {
-            i.recordId = e.recordId, i.afterChargeFinished(e.message);
+            r.recordId = e.recordId, r.afterChargeFinished(e.message);
         }), e.registeChargeStatusCallback(a.NO_CHARGING, function(e) {
-            i.afterChargeFinished("在线手动停止");
+            r.afterChargeFinished("在线手动停止");
         }), this.setData({
             pageDeep: getCurrentPages().length
-        }), wx.getSystemInfo({
-            success: function(e) {
-                i.setData({
-                    screenPx: 750 / e.screenWidth
-                });
-            }
         });
     },
     onReady: function() {},
@@ -116,8 +109,8 @@ Page({
         this.shownowtime = Date.now(), this.showed = !0, this.hidetriggered && (this.thetiming = this.hidethetiming, 
         this.Thecountdown = this.hideThecountdown, this.thetiming += (this.shownowtime - this.hidenowtime) / 1e3, 
         this.Thecountdown -= (this.shownowtime - this.hidenowtime) / 1e3), setTimeout(function() {
-            var i = wx.getStorageSync("ws-open"), s = e.getChargeStatus();
-            0 == i && s != a.CHARG_FINISH && s != a.NO_CHARGING && (e.registeListenDoneCallback(function() {
+            var r = wx.getStorageSync("ws-open"), i = e.getChargeStatus();
+            0 == r && i != a.CHARG_FINISH && i != a.NO_CHARGING && (e.registeListenDoneCallback(function() {
                 t.renderRunStatus();
             }), e.startListenStompMessage(t.recordId));
         }, 3e3), this.viewUnloaded = !1;
@@ -177,12 +170,11 @@ Page({
     },
     jump: function(e) {
         var a = this.data.adContent.type;
-        1 != a && (this.data.adContent.operator || t.post({
+        1 != a && (2 == this.data.adContent.origin && t.post({
             url: "/banner/clickBanner",
             requireAuth: !0,
             data: {
-                id: this.data.adContent.id,
-                outerId: this.data.adContent.outerId
+                id: this.data.adContent.id
             }
         }), 3 == a ? wx.navigateTo({
             url: "/pages/index/outurl/index?url=" + this.data.adContent.linkUrl
@@ -195,14 +187,24 @@ Page({
         }));
     },
     loadMultipleChargingOrders: function() {
-        var i = this;
+        var r = this;
         t.post({
             url: "/charge-record/recordStatus",
             requireAuth: !0,
             showLoading: !0,
             success: function(t) {
-                200 == t.statusCode && (0 == t.data.length ? (clearInterval(i.minusTimer), clearInterval(i.plusTimer), 
+                200 == t.statusCode && (0 == t.data.length ? (clearInterval(r.minusTimer), clearInterval(r.plusTimer), 
                 e.updateChargeStatus(a.NO_CHARGING), e.stopListenStompMessage()) : e.updateChargeStatus(a.CHARGING));
+            }
+        });
+    },
+    onButtonClick: function() {
+        var e = this;
+        wx.showModal({
+            title: "是否结束充电",
+            content: "",
+            success: function(t) {
+                t.confirm && e.stopCharging(e.recordId);
             }
         });
     },
@@ -231,40 +233,40 @@ Page({
         }), this.transferBarColor = !0);
     },
     renderRunStatus: function() {
-        var i = this;
+        var r = this;
         t.get({
             url: "/charge-record/status/" + this.recordId,
             requireAuth: !0,
             data: this.curPileTimeInfo,
             success: function(t) {
                 if (200 == t.statusCode) {
-                    i.setData({
+                    r.setData({
                         collected: t.data.collected
                     });
-                    var s = t.data;
-                    switch (s.status) {
+                    var i = t.data;
+                    switch (i.status) {
                       case 0:
                         break;
 
                       case 1:
-                        i.renderPageForCharging(), i.timingStatus(t), i.setData({
-                            power: s.power
+                        r.renderPageForCharging(), r.timingStatus(t), r.setData({
+                            power: i.power
                         });
                         break;
 
                       case 2:
                       case 3:
-                        e.updateChargeStatus(a.CHARG_FINISH, s);
+                        e.updateChargeStatus(a.CHARG_FINISH, i);
                         break;
 
                       case 4:
-                        i.setData({
+                        r.setData({
                             showBreakPower: !0
-                        }), i.renderPageForWaitCharge(), i.suspendStateQuery();
+                        }), r.renderPageForWaitCharge(), r.suspendStateQuery();
                         break;
 
                       case 5:
-                        i.renderPageForWaitCharge(), i.timingStatus(t);
+                        r.renderPageForWaitCharge(), r.timingStatus(t);
                     }
                 }
             }
@@ -300,24 +302,29 @@ Page({
         this.setData({
             power: a.power
         }), this.minusTimer = setInterval(function() {
-            t.Thecountdown <= 0 && clearInterval(t.minusTimer), t.countdown = i.formatSeconds(t.Thecountdown), 
+            t.Thecountdown <= 0 && clearInterval(t.minusTimer), t.countdown = r.formatSeconds(t.Thecountdown), 
             t.Thecountdown--, t.showed && t.setData({
                 countdown: t.countdown
             }), t.surplusTime = 100 - ~~(100 * t.Thecountdown / (60 * a.totalMinutes)), t.surplusTime !== t.lastSurplusTime && (t.lastSurplusTime = t.surplusTime);
         }, 1e3), this.thetiming = e.data.consumeSeconds;
-        var s = 60 * e.data.totalMinutes;
+        var i = 60 * e.data.totalMinutes;
         this.plusTimer = setInterval(function() {
-            t.thetiming > s && clearInterval(t.plusTimer), t.positiveobj = i.theTimeSeconds(t.thetiming, e.data.sitePrice / 10), 
+            t.thetiming > i && clearInterval(t.plusTimer), t.positiveobj = r.theTimeSeconds(t.thetiming, e.data.sitePrice / 10), 
             t.thetiming++, t.showed && t.setData({
                 Isthetiming: t.positiveobj.result
             });
         }, 1e3);
     },
     afterChargeFinished: function(e) {
-        this.chargeFinshConfirm(), wx.showToast({
-            title: e,
-            icon: "success",
-            duration: 2e3
+        clearInterval(this.minusTimer), clearInterval(this.plusTimer), this.setData({
+            finshtext: e,
+            showFinshDialogue: !0
+        }), this.transferBarColor ? wx.setNavigationBarColor({
+            frontColor: "#ffffff",
+            backgroundColor: "#126338"
+        }) : wx.setNavigationBarColor({
+            frontColor: "#ffffff",
+            backgroundColor: "#752828"
         });
     },
     stopCharging: function(e) {
@@ -339,25 +346,5 @@ Page({
         this.loadMultipleChargingOrders(), this.recordId ? wx.redirectTo({
             url: "/pages/index/records/detail/index?recordId=" + this.recordId
         }) : wx.navigateBack();
-    },
-    touchStart: function(e) {
-        this.startX = e.touches[0].pageX;
-    },
-    touchMove: function(e) {
-        this.endX = e.touches[0].pageX;
-        var t = Math.max((this.endX - this.startX) * this.data.screenPx, 10);
-        461 <= Math.floor(t) && Math.floor(t) <= 465 && wx.vibrateLong(), this.setData({
-            leftX: Math.min(t, 463),
-            crossedWidth: t > 10 ? t >= 463 ? 605 : t + 66 : 0
-        });
-    },
-    touchEnd: function(e) {
-        463 === this.data.leftX && this.stopCharging(this.recordId), this.setData({
-            leftX: 10,
-            crossedWidth: 0
-        });
-    },
-    back: function() {
-        wx.navigateBack();
     }
 });

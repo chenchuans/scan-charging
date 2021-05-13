@@ -1,6 +1,8 @@
 <view class="manager">
     <view class="manager-wrapper">
-        <image class="logpic" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_{{vehicleType==1?'diandong':'qi'}}chetubiao.png"></image>
+        <view class="logpic">
+            <image class="logpic-log" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/sitelog.png"></image>
+        </view>
         <view class="content">
             <view class="address">{{sitedetail.name}}</view>
             <view class="specifi-addr">{{sitedetail.address}}</view>
@@ -24,10 +26,8 @@
 <view class="pile-list" wx:if="{{pilepointList.length}}" wx:for="{{pilepointList}}" wx:key="index">
     <view bindtap="navToChargedetail" class="pile-item" data-offlineCharge="{{item.offlineCharge}}" data-pileNo="{{item.pileNo}}" data-pilejudge="{{item.pileJudge}}" data-status="{{item.status}}">
         <view class="serial-num {{item.status==1?'online-color':'offline-color'}}">
-            <image class="pile-img" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_zhuangdian{{item.status===1?'':'_lixian'}}.png"></image>
             <view>编号</view>
             <view class="serial-num-txt2">{{item.pileNo}}</view>
-            <image class="signalbgc" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/signal_{{item.signal}}.png"></image>
         </view>
         <view class="serial-num {{item.status==1?'online-color':'offline-color'}}">
             <view>地址</view>
@@ -42,6 +42,7 @@
                 <view class="{{item.status==1?'':'off'}}"></view>
         共{{item.total}}个
       </view>
+            <view class="signalbgc" style="background-image:url('http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/signal_{{item.signal}}.png')"></view>
         </view>
         <view catchtap="navTopile" class="charge-detail" data-pileinfo="{{item}}">
             <view class="go-charge-pile">

@@ -1,12 +1,5 @@
 <view class="page">
-    <view class="main-header">
-        <swiper autoplay="{{autoplay}}" circular="{{circular}}" class="fixed-width top-swiper" duration="{{duration}}" indicatorActiveColor="#24c771" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
-            <swiper-item bindtap="jumpOther" class="swiper-item" data-ad="{{item}}" wx:for="{{imgUrls}}" wx:key="id">
-                <image class="slide-image" mode="scaleToFill" src="{{item.imgUrl}}"></image>
-            </swiper-item>
-        </swiper>
-    </view>
-    <view class="second-content">
+    <!-- <view class="second-content">
         <view bindtap="chargingBtn" class="second-content-item">
             <image class="second-content-img" mode="scaleToFill" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_charge_chargingorder.png"></image>
             <text class="second-content-num" wx:if="{{chargingCount!=0}}">{{chargingCount}}</text>
@@ -21,44 +14,31 @@
             <text class="second-content-num" wx:if="{{revertCount!=0}}">{{revertCount}}</text>
             <view class="second-content-title">充电记录</view>
         </view>
-        <view bindtap="exchangeRecord" class="second-content-item" wx:if="{{showExchange}}">
-            <image class="second-content-img" mode="scaleToFill" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_huandianjilu.png"></image>
-            <view class="second-content-title">换电记录</view>
-        </view>
-    </view>
-    <view bindtap="jumpOther" class="system-notice" data-ad="{{systemInfo}}" wx:if="{{isShowSystemInfo}}">
+    </view> -->
+    <!-- 系统公告 -->
+    <!-- <view bindtap="jumpOther" class="system-notice" data-miniprogramPage="{{systemInfo.miniprogramPage}}" data-origin="{{systemInfo.origin}}" data-richid="{{systemInfo.id}}" data-type="{{systemInfo.type}}" data-url="{{systemInfo.linkUrl}}" wx:if="{{isShowSystemInfo}}">
         <image mode="widthFix" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/pic_xitonggonggao.png"></image>
         <view class="notice-bar-wrap">
             <view animation="{{animationData}}" class="notice-bar-content">{{systemInfo.title}}</view>
         </view>
-    </view>
-    <view class="main-header">
+    </view> -->
+    <!-- 操作指南 -->
+    <!-- <view class="main-header">
         <swiper circular="{{circular}}" class="fixed-width bottom-swiper" indicatorActiveColor="#24c771" indicatorDots="{{indicatorDots}}">
             <swiper-item wx:for="{{imgList}}" wx:key="index">
                 <image class="guide-image" mode="scaleToFill" src="{{item}}"></image>
             </swiper-item>
         </swiper>
-    </view>
-    <view bindtap="sweepCode" class="code-charge-btn" data-type="charge" wx:if="{{showCharge}}">
+    </view> -->
+    <view bindtap="sweepCode" class="code-charge-btn">
         <view class="code-charge-box">
-            <image mode="widthFix" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_saoma.png"></image>
             <view>扫码充电</view>
         </view>
     </view>
-    <view class="charge-exchange" wx:if="{{showExchange}}">
-        <view catchtap="sweepCode" class="scan-code-charge" data-type="charge">
-            <image class="charge-img" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_chongdian.png"></image>
-            <view class="charge-text">充电</view>
-        </view>
-        <view catchtap="sweepCode" class="scan-code-exchange" data-type="exchange">
-            <image class="charge-img" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_huandian.png"></image>
-            <view class="charge-text">换电</view>
-        </view>
-    </view>
-    <view bindtap="inputPileNum" class="input-pile-number">
+    <!-- <view bindtap="inputPileNum" class="input-pile-number">
         <text>输入桩号充电</text>
-    </view>
-    <view class="mask" wx:if="{{mask}}"></view>
+    </view> -->
+    <!-- <view class="mask" wx:if="{{mask}}"></view>
     <view class="pile-num-popup" wx:if="{{pileNumPopup}}">
         <view class="pile-num-popup-title">请输入充电桩桩号</view>
         <input focus bindinput="getpileNo" class="pile-num-popup-input" placeholder="" type="number"></input>
@@ -68,5 +48,5 @@
             <view class="column-line"></view>
             <view bindtap="sureSearchPile" class="confirm">确定</view>
         </view>
-    </view>
+    </view> -->
 </view>

@@ -14,7 +14,7 @@ Page({
         latitude: 31.36897,
         markers: [],
         condition: !1,
-        tapSiteDetail: "",
+        tapSiteDeail: "",
         title: "我要当桩主!限时抢桩主名额,每个充电桩发放10个.",
         size: 14,
         scale: 16,
@@ -91,10 +91,9 @@ Page({
             success: function(t) {
                 if (200 === t.statusCode) {
                     if (0 === t.data.length) return e.setData({
-                        noNearSite: !0
+                        nonearsite: !0
                     }), !1;
                     e.setData({
-                        noNearSite: !1,
                         nearSiteList: t.data
                     }), wx.hideNavigationBarLoading(), wx.stopPullDownRefresh();
                 }
@@ -107,14 +106,12 @@ Page({
             url: "/charge-site/index",
             data: this.params,
             showLoading: !0,
-            loadingText: "正在加载...",
             success: function(t) {
                 if (200 === t.statusCode) {
                     if (0 === t.data.length) return e.setData({
-                        noNearSite: !0
+                        nonearsite: !0
                     }), e.changeVehicleType = !0, !1;
                     e.setData({
-                        noNearSite: !1,
                         nearSiteList: e.data.nearSiteList.concat(t.data)
                     });
                 }
@@ -144,30 +141,10 @@ Page({
         this.setData({
             searchValue: t,
             name: t,
-            hasMore: !1,
-            noNearSite: !1
-        }), this.params.name = t, this.getSearchSiteList();
-    },
-    getSearchSiteList: function() {
-        var e = this;
-        this.params.page = 0, t.get({
-            url: "/charge-site/index",
-            data: this.params,
-            showLoading: !0,
-            loadingText: "正在加载...",
-            success: function(t) {
-                if (200 === t.statusCode) {
-                    if (0 === t.data.length) return e.setData({
-                        noNearSite: !0
-                    }), e.changeVehicleType = !0, !1;
-                    e.setData({
-                        noNearSite: !1,
-                        nearSiteList: t.data
-                    });
-                }
-                e.changeVehicleType = !0;
-            }
-        });
+            hasMore: !1
+        }), this.params.name = t, this.setData({
+            nearSiteList: []
+        }), this.getSiteList();
     },
     listNavToSite: function(t) {
         var e = t.currentTarget.dataset.siteinfo.latitude, a = t.currentTarget.dataset.siteinfo.longitude, i = t.currentTarget.dataset.siteinfo.name, n = t.currentTarget.dataset.siteinfo.location;
@@ -192,9 +169,9 @@ Page({
         }, 1e3);
     },
     navTositedetail: function(t) {
-        var e = t.currentTarget.dataset, a = e.siteid, i = e.vehicletype;
+        var e = t.currentTarget.dataset.siteid;
         wx.navigateTo({
-            url: "/pages/near/site-detail/index?siteId=" + a + "&vehicleType=" + i
+            url: "../site-detail/index?siteId=" + e
         });
     },
     toMapModel: function() {
@@ -255,7 +232,7 @@ Page({
             },
             success: function(t) {
                 200 === t.statusCode ? n.setData({
-                    tapSiteDetail: t.data,
+                    tapSiteDeail: t.data,
                     condition: !0
                 }) : wx.showToast({
                     title: t.data,
@@ -273,7 +250,7 @@ Page({
         });
     },
     navToSite: function() {
-        var t = this.data.tapSiteDetail;
+        var t = this.data.tapSiteDeail;
         wx.openLocation({
             latitude: t.latitude,
             longitude: t.longitude,

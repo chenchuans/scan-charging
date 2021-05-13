@@ -1,6 +1,6 @@
 <view>
     <view class="logo">
         <image class="logo-img" src="{{logoImg}}"></image>
-        <view class="version">版本号 V2.3.5</view>
+        <view class="version">版本号 V2.2.0</view>
     </view>
 </view>

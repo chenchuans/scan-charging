@@ -1,4 +1,4 @@
-var e = require("../../../utils/http.js"), t = require("../../../utils/location.js"), a = getApp();
+var t = require("../../../utils/http.js"), e = require("../../../utils/location.js"), a = getApp();
 
 Page({
     data: {
@@ -7,65 +7,63 @@ Page({
         siteId: "",
         sitedetail: "",
         activityOpened: !1,
-        showRecharge: !1,
-        vehicleType: 1
+        showRecharge: !1
     },
-    onLoad: function(e) {
+    onLoad: function(t) {
         this.setData({
-            siteId: e.siteId,
-            vehicleType: e.vehicleType
+            siteId: t.siteId
         });
     },
     onShow: function() {
         var i = this;
-        a.getConfig().then(function(e) {
+        a.getConfig().then(function(t) {
             i.setData({
-                isShowPrice: e.config.pilePrice
+                isShowPrice: t.config.pilePrice
             });
-        }), e.get({
+        }), t.get({
             url: "/charge-site/show/" + this.data.siteId,
-            success: function(e) {
-                200 === e.statusCode ? (i.setData({
-                    sitedetail: e.data
-                }), e.data.activityEnabled && i.setData({
+            success: function(t) {
+                200 === t.statusCode ? (i.setData({
+                    sitedetail: t.data
+                }), t.data.activityEnabled && i.setData({
                     activityOpened: !0
                 })) : wx.showToast({
-                    title: e.data,
+                    title: t.data,
                     icon: "none",
                     duration: 2e3
                 });
             },
-            fail: function(e) {
+            fail: function(t) {
                 wx.showToast({
-                    title: e.data,
+                    title: t.data,
                     icon: "none",
                     duration: 2e3
                 });
             }
-        }), t.getLocation(function(e) {
-            i.data.longitude = e.longitude, i.data.latitude = e.latitude, i.chargesiteObj = {
-                latitude: e.latitude,
-                longitude: e.longitude
+        }), e.getLocation(function(t) {
+            i.data.longitude = t.longitude, i.data.latitude = t.latitude, i.chargesiteObj = {
+                latitude: t.latitude,
+                longitude: t.longitude
             }, n(i.chargesiteObj);
         });
-        var n = function(t) {
-            t.siteId = i.data.siteId, e.get({
+        var n = function(e) {
+            e.siteId = i.data.siteId, t.get({
                 url: "/charge-pile/index",
-                data: t,
-                success: function(e) {
-                    200 === e.statusCode ? 0 == e.data.length ? i.setData({
+                data: e,
+                success: function(t) {
+                    200 === t.statusCode ? 0 == t.data.length ? i.setData({
                         nopilepointlist: !0
                     }) : i.setData({
-                        pilepointList: e.data
+                        pilepointList: t.data
                     }) : wx.showToast({
-                        title: e.data,
+                        title: t.data,
                         icon: "none",
                         duration: 2e3
                     });
                 },
-                fail: function(e) {
+                fail: function(t) {
                     wx.showToast({
-                        title: e.data,
+                        title: t.data,
                         icon: "none",
                         duration: 2e3
                     });
@@ -73,7 +71,7 @@ Page({
             });
         };
     },
-    toUsercardRecharge: function(e) {
+    toUsercardRecharge: function(t) {
         this.setData({
             showRecharge: !0
         });
@@ -83,16 +81,16 @@ Page({
             showRecharge: !1
         });
     },
-    chooseRecharge: function(e) {
-        var t = e.currentTarget.dataset, a = t.siteid, i = "";
-        i = 5 == t.type ? "/pages/mine/topup/index?siteId=" + a + "&rechargeType=5" : "/pages/mine/topup/index?cardNo=&siteId=" + a + "&rechargeType=4", 
+    chooseRecharge: function(t) {
+        var e = t.currentTarget.dataset, a = e.siteid, i = "";
+        i = 5 == e.type ? "/pages/mine/topup/index?siteId=" + a + "&rechargeType=5" : "/pages/mine/topup/index?cardNo=&siteId=" + a + "&rechargeType=4", 
         wx.navigateTo({
             url: i
         }), this.closeShowRecharge();
     },
-    navToChargedetail: function(e) {
-        if (1 == e.currentTarget.dataset.status || e.currentTarget.dataset.offlinecharge) if (e.currentTarget.dataset.pilejudge) {
-            var t = e.currentTarget.dataset.pileno, a = encodeURIComponent(t);
+    navToChargedetail: function(t) {
+        if (1 == t.currentTarget.dataset.status || t.currentTarget.dataset.offlinecharge) if (t.currentTarget.dataset.pilejudge) {
+            var e = t.currentTarget.dataset.pileno, a = encodeURIComponent(e);
             wx.navigateTo({
                 url: "/pages/charge/detail/index?scene=" + a
             });
@@ -106,8 +104,8 @@ Page({
             duration: 2e3
         });
     },
-    navTopile: function(e) {
-        var t = e.currentTarget.dataset.pileinfo, a = t.latitude, i = t.longitude, n = t.pileNo, o = t.location;
+    navTopile: function(t) {
+        var e = t.currentTarget.dataset.pileinfo, a = e.latitude, i = e.longitude, n = e.pileNo, o = e.location;
         wx.openLocation({
             latitude: a,
             longitude: i,

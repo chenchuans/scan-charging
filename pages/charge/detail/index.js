@@ -60,8 +60,7 @@ Page({
         dynamicCode: "",
         mixPayEnabled: !1,
         isShowOfflineTips: !1,
-        closeTime: 10,
-        showExchange: !1
+        closeTime: 10
     },
     timer: null,
     isTapPort: !1,
@@ -75,7 +74,6 @@ Page({
     siteId: 0,
     v: null,
     wxAppMsgTmplId: "",
-    formId: "",
     quantityOptions: [ {
         value: 500,
         label: "0.5千瓦时",
@@ -181,21 +179,15 @@ Page({
     } ],
     instantPayEnable: !0,
     onLoad: function(a) {
-        var i = this, o = wx.getStorageSync("miniType");
-        if (this.setData({
-            isWeChat: 1 == o,
-            miniPayName: 1 == o ? "微信支付" : "支付宝支付",
-            miniPayLogo: 1 == o ? "https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_wechatpayment2x.png" : "https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_zhifubao.png"
-        }), a.scene) a.isContinue ? (this.pileNo = a.scene, this.pilePort = a.pileNumSite) : (this.pileNo = decodeURIComponent(a.scene), 
+        var i = this;
+        if (a.scene) a.isContinue ? (this.pileNo = a.scene, this.pilePort = a.pileNumSite) : (this.pileNo = decodeURIComponent(a.scene), 
         a.pileNumSite && (this.pilePort = a.pileNumSite)); else {
-            var n = decodeURIComponent(a.q);
-            if (t.ermpileNo && 2 == o && (n = decodeURIComponent(t.ermpileNo)), this.pileNo = n.substring(n.lastIndexOf("/") + 1).trim(), 
-            this.pileNo.length < 7) {
-                var r = n.substring(n.indexOf("mini-app/") + 9, n.lastIndexOf("/")), c = r.slice(4, 6) + r.slice(2, 4) + r.slice(0, 2);
-                "ff" === this.pileNo ? this.pileNo = s.hex2int(c) : (this.pilePort = s.hex2int(this.pileNo) + 1, 
-                this.pileNo = s.hex2int(c));
-            } else this.pileNo.includes("-") && (this.pilePort = this.pileNo.slice(this.pileNo.indexOf("-") + 1), 
-            this.pileNo = this.pileNo.slice(0, this.pileNo.indexOf("-")));
+            var o = decodeURIComponent(a.q);
+            if (this.pileNo = o.substring(o.lastIndexOf("/") + 1).trim(), this.pileNo.length < 7) {
+                var n = o.substring(o.indexOf("mini-app/") + 9, o.lastIndexOf("/")), r = n.slice(4, 6) + n.slice(2, 4) + n.slice(0, 2);
+                "ff" === this.pileNo ? this.pileNo = s.hex2int(r) : (this.pilePort = s.hex2int(this.pileNo) + 1, 
+                this.pileNo = s.hex2int(r));
+            }
         }
         this.setData({
             pageDeep: getCurrentPages().length
@@ -203,21 +195,20 @@ Page({
             success: function(t) {
                 i.v = t.version;
             }
-        }), t.getConfig().then(function(t) {
-            i.setData({
-                showExchange: t.config.batteriesSharingEnable
-            });
-        }), e.authorized(!0, !0) && (this.loadWelcomeImage(), this.getpaymentMethod(), this.loadChargeOption().then(function() {
-            i.loadPileInfo();
-        }));
+        });
+        var c = wx.getStorageSync("miniType");
+        if (this.setData({
+            isWeChat: 1 == c,
+            miniPayName: 1 == c ? "微信支付" : "支付宝支付",
+            miniPayLogo: 1 == c ? "https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_wechatpayment2x.png" : "https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_zhifubao.png"
+        }), t.ermpileNo && 2 == c) {
+            var l = decodeURIComponent(t.ermpileNo), d = l.substring(l.lastIndexOf("/") + 1).trim();
+            -1 != d.indexOf("-") ? (this.pileNo = d.split("-")[0], this.codePileNumSite = d.split("-")[1]) : this.pileNo = d;
+        }
+        e.authorized(!0, !0) && (this.loadWelcomeImage(), this.getpaymentMethod(), this.loadChargeOption(), 
+        this.loadPileInfo());
     },
     onShow: function() {},
-    clickMask: function() {
-        this.setData({
-            isShowMask: !1,
-            isShowPaymentMethod: !1
-        });
-    },
     choossPayment: function(t) {
         var e = t.currentTarget.dataset.method;
         this.setData({
@@ -326,26 +317,19 @@ Page({
     },
     loadChargeOption: function() {
         var t = this;
-        return new Promise(function(e, i) {
-            a.get({
-                url: "/charge-option/index",
-                requireAuth: !0,
-                data: {
-                    pileNo: t.pileNo
-                },
-                success: function(a) {
-                    200 == a.statusCode && (a.data.timeOptions.length && (t.timeOptions = a.data.timeOptions), 
-                    a.data.quantityOptions.length && (t.quantityOptions = a.data.quantityOptions), a.data.amountOptions.length && (t.amountOptions = a.data.amountOptions), 
-                    e());
-                },
-                fail: function(t) {
-                    wx.showToast({
-                        title: t,
-                        icon: "none",
-                        duration: 2e3
-                    }), i();
-                }
-            });
+        a.get({
+            url: "/charge-option/index",
+            requireAuth: !0,
+            data: {
+                pileNo: this.pileNo
+            },
+            success: function(e) {
+                200 == e.statusCode && (e.data.timeOptions.length && (t.timeOptions = e.data.timeOptions), 
+                e.data.quantityOptions.length && (t.quantityOptions = e.data.quantityOptions), e.data.amountOptions.length && (t.amountOptions = e.data.amountOptions));
+            },
+            fail: function(t) {
+                console.log(t);
+            }
         });
     },
     loadPileInfo: function() {
@@ -376,7 +360,7 @@ Page({
                         activityOpened: !0
                     }), t.ports.map(function(t) {
                         return 1 != t.status && (t.pickDisabled = !0), t;
-                    }), (0 == e.data.price && 3 == e.data.optType && 3 != e.data.feeType || t.pileNo && t.pilePort) && t.ports.map(function(t) {
+                    }), (0 == e.data.price && 0 == e.data.minPrepaidAmount && 3 == e.data.optType && 3 != e.data.feeType || t.pileNo && t.pilePort) && t.ports.map(function(t) {
                         return t.pickDisabled = !0, t;
                     }), a > t.data.routerNum) {
                         for (var i = parseInt(a / t.data.routerNum), s = a % t.data.routerNum, o = [], n = [], r = 0, c = 0, l = 0, d = 0; d < i + 1; d++) r = d * t.data.routerNum + 1, 
@@ -392,9 +376,7 @@ Page({
                     } else t.setData({
                         chargingPileList: [ t.ports.slice(0, t.data.routerNum) ]
                     });
-                    1 === t.ports.length && (t.setData({
-                        curIndex: 1
-                    }), t.sendport = 1, t.isTapPort = !0), t.pileNo && t.pilePort && (t.pilePort = "A" === t.pilePort ? 1 : "B" === t.pilePort ? 2 : t.pilePort, 
+                    t.pileNo && t.pilePort && (t.pilePort = "A" === t.pilePort ? 1 : "B" === t.pilePort ? 2 : t.pilePort, 
                     t.setData({
                         routerIndex: parseInt((t.pilePort - 1) / t.data.routerNum)
                     }), t.codeOnTapPort(t.pilePort));
@@ -405,9 +387,8 @@ Page({
                     h.push(t.quantityOptions[u]);
                     if (3 == e.data.optType) for (var f = 0; f < t.amountOptions.length; f++) t.amountOptions[f].price = t.amountOptions[f].value, 
                     h.push(t.amountOptions[f]);
-                    if (e.data.minPrepaidAmount) {
-                        var m = 0;
-                        e.data.sitePrice && (m = 10 * e.data.minPrepaidAmount / e.data.sitePrice), 2 == e.data.feeType && (m *= 1e3);
+                    var m = 10 * e.data.minPrepaidAmount / e.data.sitePrice;
+                    if (2 == e.data.feeType && (m *= 1e3), e.data.sitePrice > 0) {
                         var g = [];
                         if (e.data.optType == e.data.feeType && 3 != e.data.optType) {
                             for (var w = 0; w < h.length; w++) h[w].value >= m && g.push(h[w]);
@@ -569,28 +550,28 @@ Page({
             duration: 2e3
         }); else {
             var e = t.currentTarget.dataset, a = e.curindex, i = e.status, s = e.port;
-            if ("1" != i) return;
+            if ("1" !== i) return;
             this.setData({
                 curIndex: a + this.data.routerIndex * this.data.routerNum
             }), this.sendport = s, this.isTapPort = !0;
         }
     },
-    nowCharge: function(t) {
-        if (this.formId = t.detail.formId, this.data.isWeChat) {
-            var e = this;
+    nowChargine: function() {
+        if (this.data.isWeChat) {
+            var t = this;
             wx.requestSubscribeMessage({
                 tmplIds: [ this.wxAppMsgTmplId ],
-                success: function(t) {
-                    e.startCharge();
+                success: function(e) {
+                    t.startCharge();
                 },
-                fail: function(t) {
+                fail: function(e) {
                     wx.showToast({
                         title: "未订阅将收不到充电结束的消息哦！",
                         icon: "none",
                         duration: 2e3,
                         success: function() {
                             setTimeout(function() {
-                                e.startCharge();
+                                t.startCharge();
                             }, 1e3);
                         }
                     });
@@ -600,7 +581,7 @@ Page({
     },
     startCharge: function(t) {
         var e = this;
-        if (this.isTapPort) if (0 != this.data.price || 3 != this.data.optType || 3 == this.data.feeType) {
+        if (this.isTapPort) {
             if (2 === this.data.pileStatus && this.data.offlineCharge) return 1 == this.data.chooseWhichPayment && this.data.balance < this.data.otpPrice && !this.data.mixPayEnabled ? void wx.showModal({
                 title: "温馨提示",
                 showCancel: !0,
@@ -699,7 +680,7 @@ Page({
                 port: this.sendport,
                 hour: this.hour
             }), this.startCharging();
-        } else this.startCharging(); else wx.showToast({
+        } else wx.showToast({
             title: "请选择充电端口",
             icon: "none",
             duration: 2e3
@@ -707,7 +688,7 @@ Page({
     },
     startCharging: function() {
         var e = this;
-        0 == this.data.price && 3 == this.data.optType && 3 != this.data.feeType && (this.hour = 0), 
+        0 == this.data.price && 3 == this.data.optType && 3 != this.data.feeType && 0 == this.data.minAmount && (this.hour = 0), 
         a.post({
             url: "/charge-pile/start/" + this.pileId,
             requireAuth: !0,
@@ -720,7 +701,6 @@ Page({
                 optType: this.optType,
                 clntType: this.data.isWeChat ? 1 : 2,
                 payType: this.data.chooseWhichPayment,
-                formId: this.formId,
                 v: this.v
             },
             success: function(a) {
@@ -921,12 +901,11 @@ Page({
     },
     jump: function(t) {
         var e = this.data.adContent.type;
-        1 != e && (this.data.adContent.operator || a.post({
+        1 != e && (2 == this.data.adContent.origin && a.post({
             url: "/banner/clickBanner",
             requireAuth: !0,
             data: {
-                id: this.data.adContent.id,
-                outerId: this.data.adContent.outerId
+                id: this.data.adContent.id
             }
         }), 3 == e ? wx.navigateTo({
             url: "/pages/index/outurl/index?url=" + this.data.adContent.linkUrl
@@ -956,11 +935,6 @@ Page({
             isShowMask: !1
         }), wx.reLaunch({
             url: "/pages/near/near-site/index"
-        });
-    },
-    exchange: function() {
-        wx.navigateTo({
-            url: "/pages/charge/exchange/index?pileNo=" + this.pileNo
         });
     }
 });
