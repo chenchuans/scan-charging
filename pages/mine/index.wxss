@@ -1,0 +1,36 @@
+image {
+  width: 60rpx !important;
+  height: 60rpx !important;
+  display: inline-block;
+}
+.recharge-wrapper {
+  display: flex;
+  text-align: center;
+  margin: 30rpx auto;
+}
+.lightning {
+  display: inline-block;
+}
+
+.suspension {
+  width: 100%;
+  padding: 50rpx 0;
+  text-align: center;
+}
+.balance {
+  font-size: 40rpx;
+}
+.balancepr {
+  padding-top: 30rpx;
+  font-size: 24rpx;
+}
+.balancepr text {
+  font-size: 36rpx;
+}
+.more-rec {
+  
+}
+
+.more-rec-ite {
+  display: flex;
+}

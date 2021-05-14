@@ -1,7 +1,7 @@
 <view class="recharge">
     <view bindtap="controlChangeUserModal" class="disFlex recharge-wrapper">
         <image class="lightning" src="{{avatarUrl}}"></image>
-        <view class="user {{phone?'':'phone'}}">{{phone?toHide.toHide(phone):'登录体验更多功能'}}</view>
+        <view class="user {{phone?'':'phone'}}">{{phone?toHide.toHide(phone):''}}</view>
         <view class="login-now" wx:if="{{!phone}}">立即登录</view>
     </view>
     <view class="disFlex suspension">
@@ -9,24 +9,24 @@
       <view class="balancepr">
                 <text>{{walletAmount/100}}</text>元</view>
         </view>
-        <view bindtap="navtoTopup" class="topup">查看</view>
+        <!-- <view bindtap="navtoTopup" class="topup">查看</view> -->
     </view>
 </view>
-<view bindtap="jumptoCardManagement" class="disFlex manage-card">
+<!-- <view bindtap="jumptoCardManagement" class="disFlex manage-card">
     <image class="manage-card-left" mode="widthFix" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_diankaguanli.png"></image>
     <view class="manage-card-middle">
         <view>电卡管理</view>
         <view>线上线下电卡一键管理</view>
     </view>
     <view class="iconfont icon-youjiantou manageCardBottom"></view>
-</view>
-<block wx:if="{{noAgent}}">
+</view> -->
+<!-- <block wx:if="{{noAgent}}">
     <view class="list-title">加盟合作</view>
     <view bindtap="jumpToapplyMaster" class="join-us">
         <image mode="widthFix" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/hezuo.gif"></image>
     </view>
-</block>
-<block wx:if="{{pilingAccount&&isWeChat}}">
+</block> -->
+<!-- <block wx:if="{{pilingAccount&&isWeChat}}">
     <view class="list-title">站点管理</view>
     <view bindtap="jumpToH5" class="disFlex intoWallet">
         <image class="intoWalletImgpilingAccount" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/pic_zhandianguanli.png"></image>
@@ -36,8 +36,8 @@
         </view>
         <view class="intoWalletBtn">立即查看</view>
     </view>
-</block>
-<block wx:if="{{isAgent&&isWeChat}}">
+</block> -->
+<!-- <block wx:if="{{isAgent&&isWeChat}}">
     <view class="list-title">代理商管理</view>
     <view class="disFlex intoWallet">
         <image class="intoWalletImg" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/pic_dailishang.png"></image>
@@ -47,8 +47,8 @@
         </view>
         <button bindgetuserinfo="jumpToagentH5" class="intoWalletBtn" openType="getUserInfo">立即体验</button>
     </view>
-</block>
-<block wx:if="{{property&&isWeChat}}">
+</block> -->
+<!-- <block wx:if="{{property&&isWeChat}}">
     <view class="list-title">收益管理</view>
     <view class="disFlex intoWallet">
         <image class="intoWalletImgproperty" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/pic_shouyizhanghu.png"></image>
@@ -58,12 +58,12 @@
         </view>
         <button bindgetuserinfo="jumpToPropertyH5" class="intoWalletBtnproperty" openType="getUserInfo">立即查看</button>
     </view>
-</block>
+</block> -->
 <view class="more-rec">
-    <view bindtap="accountManagement" class="more-rec-item">
+    <!-- <view bindtap="accountManagement" class="more-rec-item">
         <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_zhanghaoguanli.png"></image>
         <view class="more-rec-item-title">账号管理</view>
-    </view>
+    </view> -->
     <view bindtap="shareBtn" class="more-rec-item" wx:if="{{isWeChat}}">
         <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_fenxiang.png"></image>
         <view class="more-rec-item-title">邀请好友</view>
