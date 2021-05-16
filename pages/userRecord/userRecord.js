@@ -1,4 +1,4 @@
-// pages/mine.js
+// pages/userRecord.js
 Page({
 
   /**

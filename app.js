@@ -1,7 +1,12 @@
 var e = require("./utils/http.js"), t = require("./utils/auth.js"), a = require("./utils/client.js"), r = require("./utils/constant.js"), s = require("./utils/location.js");
 
 App({
-    userInfo: null,
+    userInfo: {
+        username: '',
+        password: '',
+        phone: '',
+        uid: ''
+    },
     firstShow: !0,
     chargeStatus: r.NO_CHARGING,
     chargeStatusCallbacks: [],

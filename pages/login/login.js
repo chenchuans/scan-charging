@@ -1,67 +1,46 @@
 // pages/login/login.js
-// i = require("../../utils/http.js")
+const t = require("../../utils/http.js");
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    username: '',
+    password: '',
+    phone: ''
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  bindName: function (e) {
+    this.setData({
+      username: e.detail.value
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  bindPhone: function (e) {
+    this.setData({
+      phone: e.detail.value
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  bindPassword: function (e) {
+    this.setData({
+      password: e.detail.value
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  submit: function () {
+    const _this = this;
+    const {password, phone, username} = this.data;
+      t.post({
+          url: "/main/user/login",
+          data: {password, phone, username},
+          success: function(res) {
+              if (res.statusCode === 200) {
+                  app.userInfo = {password, phone, username, uid: res.data.uid};
+              }
+              wx.showToast({
+                decoration: 2000,
+                title: res.message
+              });
+          }
+      });
   }
 })

@@ -5,7 +5,9 @@
     "pages/mine/mine",
     "pages/scan/scan",
     "pages/login/login",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/userRecord/userRecord",
+    "pages/buy/buy"
   ],
   "page": {
     "pages/index/index": {
