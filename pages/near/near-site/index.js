@@ -30,11 +30,17 @@ Page({
         });
     },
     getSetList: function() {
+        const _this = this;
         t.post({
             url: "/home/set/list",
             data: {},
-            success: function(t) {
-                console.log(333, t)
+            success: function(res) {
+                if (res.statusCode === 200) {
+                    _this.setData({
+                        setList: res.data
+                    });
+                   
+                }
             }
         });
     }
