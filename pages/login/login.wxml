@@ -1,0 +1,30 @@
+<!--pages/login/login.wxml-->
+<view class="wxapp-modal">
+    <view class="content">
+        <view class="the-title">
+            <view bindtap="closeDialog" class="close">
+                <image class="close-img" src="../../icons/close.png"></image>
+            </view>
+            <text>{{title}}</text>
+        </view>
+        <form bindreset="formReset" bindsubmit="formSubmit">
+            <view class="keyphone" wx:if="{{isCode}}">
+                <input bindinput="mobileInputEvent" class="contact-input" cursorSpacing="20" maxlength="11" name="phone" placeholder="请输入手机号码" placeholderClass="input-placeholder" type="number" value="{{phone}}"></input>
+            </view>
+            <button bindgetphonenumber="getPhoneNumber" class="phone-num" openType="getPhoneNumber" wx:if="{{isShow}}">
+                <text style="color:#999;">+86</text> {{phone==''?'点击获取手机号':phone}}</button>
+            <view class="code" wx:if="{{isCode}}">
+                <view class="codechild">
+                    <input class="code-input" cursorSpacing="20" name="captcha" placeholder="请输入验证码" placeholderClass="input-placeholder" type="number"></input>
+                </view>
+                <text bindtap="getVerificationCode" class="{{VerificationCode?'contactgetcode':'countdownnow'}}" id="{{VerificationCode?'contactgetcode':'countdownnow'}}">{{time}}
+        </text>
+            </view>
+            <view class="cover-submit">
+                <button class="mysubmit" formType="submit" hoverClass="mysubmitdown">{{buttonText}}</button>
+            </view>
+        </form>
+    </view>
+    <view class="mask"></view>
+</view>
+

@@ -1,5 +1,0 @@
-<view style="text-align:center;">
-    <image class="site" src="http://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/site.png"></image>
-    <view class="text1">电卡购买完成,我们将尽快给您发货!</view>
-</view>
-<navigator class="back" hoverClass="back-hover" openType="reLaunch" url="/pages/index/index">返回首页</navigator>

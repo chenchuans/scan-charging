@@ -1,8 +1,0 @@
-<view class="container">
-    <view class="tit">当前余额(元)</view>
-    <view class="amount">{{balance/100}}</view>
-</view>
-<view bindtap="naVtopAmount" class="top">
-    <view>去充值</view>
-    <view class="iconfont icon-youjiantou recharge-icon "></view>
-</view>

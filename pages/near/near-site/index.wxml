@@ -1,6 +1,0 @@
-<view class="modular-tabs">
-   <view wx:for="{{setList}}" wx:key="index">
-   {{item.name}}
-    </view>
-    3443
-</view>

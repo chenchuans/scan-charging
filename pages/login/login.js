@@ -1,4 +1,5 @@
-// pages/index.js
+// pages/login/login.js
+// i = require("../../utils/http.js")
 Page({
 
   /**

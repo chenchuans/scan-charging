@@ -1,4 +1,4 @@
-// pages/index.js
+// pages/scan/scan.js
 Page({
 
   /**
