@@ -1,67 +1,43 @@
-function e(e) {
-    var n = wx.getStorageSync("networkType"), a = wx.getStorageSync("networkNomeShowModal");
+const app = getApp();
+const baseUrl = 'http://mayun.vaiwan.com/cp/v1';
+function http(e) {
+    let n = wx.getStorageSync("networkType");
+    let a = wx.getStorageSync("networkNomeShowModal");
     if ("none" == n && !a) return wx.showModal({
         title: "当前没有网络，请检查网络设置",
         content: "",
-        showCancel: !1,
+        showCancel: false,
         success: function(e) {
-            wx.setStorageSync("networkNomeShowModal", !1);
+            wx.setStorageSync("networkNomeShowModal", false);
         }
-    }), void wx.setStorageSync("networkNomeShowModal", !0);
-    new RegExp("^/").test(e.url) && (e.url = t + e.url, e.data = e.data || {}, e.data.lang = "zh"), 
-    e.showLoading && (e.loadingText ? wx.showLoading({
-        title: e.loadingText,
-        mask: !0
-    }) : wx.showLoading({
-        title: "  ",
-        mask: !0
-    }));
-    var r = e.complete;
-    e.complete = function() {
-        e.showLoading && wx.hideLoading(), r && r();
-    };
-    var i = e.success;
-    if (e.success = function(t) {
-        if (e.showLoading && wx.hideLoading(), 500 == t.statusCode) wx.showModal({
-            title: "后台出错啦",
-            content: JSON.stringify(t.data)
-        }); else if (1e3 == t.statusCode) wx.showModal({
-            title: "您的版本太老啦，请杀掉进程重新打开小程序来触发更新吧",
-            content: ""
-        }); else {
-            if (t.isOk = function() {
-                return t.statusCode >= 200 && t.statusCode <= 300;
-            }, "alipay" === wx.__target__) {
-                var o = t.data;
-                try {
-                    t.data = JSON.parse(o);
-                } catch (e) {
-                    t.data = o;
-                }
-            }
-            i && i(t);
-        }
-    }, "alipay" === wx.__target__ && (e.dataType = "text"), !e.requireAuth) return wx.request(e);
-    o || (o = require("./auth.js")), o.token(function(t) {
-        return e.header = e.header || {}, 1 == wx.getStorageSync("miniType") ? e.header["WX-Token"] = t : e.header["ZFB-Token"] = t, 
-        wx.request(e);
-    });
+    })
 }
 
-var t = require("./config.js").endpoint.https, o = null;
 
 module.exports = {
-    get: function(t) {
-        return t.method = "GET", e(t);
-    },
     post: function(t) {
-        return t.method = "POST", t.header = t.header || {}, 
-        e(t);
-    },
-    put: function(t) {
-        return t.method = "PUT", e(t);
-    },
-    delete: function(t) {
-        return t.method = "DELETE", e(t);
-    }
+        const {url, data, success} = t;
+        const list = ['/home/set/list', '/main/user/login', '/main/user/reg'];
+        if (!list.includes(t.url) && !data.uid) {
+            wx.reLaunch({
+                url: '/pages/login/login'
+            });
+            return;
+        }
+        return new Promise((resolve, reject) => {
+          //网络请求
+          wx.request({
+            url: baseUrl + url,
+            data,
+            method: 'POST',
+            // header: headerConfig,
+            success: function (res) {//服务器返回数据
+                success(res);
+            },
+            fail: function (error) {
+              reject(error);
+            }
+          })
+        });
+      }
 };

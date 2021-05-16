@@ -1,5 +1,5 @@
 <!--pages/mine.wxml-->
-<view class="login-now" bindtap="bindLogin">立即登录</view>
+<view class="login-now" bindtap="bindLogin">{{uid ? username : '立即登录'}}</view>
 <view class="more-rec">
     <view bindtap="shareBtn" class="more-rec-item">
         <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_fenxiang.png"></image>

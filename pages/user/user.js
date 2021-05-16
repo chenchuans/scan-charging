@@ -20,7 +20,7 @@ Page({
           "desctext":this.data.value3
         },
         success: function(res) {
-            if (res.statusCode === 200) {
+            if (res.code === 200) {
                 console.log("res",res)
                 wx.showToast({
                     decoration:5000,
@@ -36,7 +36,7 @@ Page({
       url: "/main/help/list",
       data: {},
       success: function(res) {
-          if (res.statusCode === 200) {
+          if (res.code === 200) {
               console.log("getList",res)
               // wx.showToast({
               //     decoration:5000,

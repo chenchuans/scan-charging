@@ -38,7 +38,7 @@ Page({
         url: "/main/user/login",
         data: {password, phone, username},
         success: function(res) {
-            if (res.statusCode === 200) {
+            if (res.code === 200) {
                 app.userInfo = {password, phone, username, uid: res.data.id};
                 wx.reLaunch({
                   url: '/pages/index/index'

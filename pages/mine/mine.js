@@ -1,5 +1,5 @@
 // pages/mine.js
-const t = require("../../utils/http.js");
+const http = require("../../utils/http.js");
 const app = getApp();
 Page({
 
@@ -8,6 +8,7 @@ Page({
    */
   data: {
     uid: '',
+    username: '',
     isRegistered: false
   },
 
@@ -15,9 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const {uid} = app.userInfo;
+    const {uid, username} = app.userInfo;
     if (uid) {
-      this.setData({uid});
+      this.setData({uid, username});
     }
   },
 

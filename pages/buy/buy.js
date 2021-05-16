@@ -1,4 +1,6 @@
 // pages/buy/buy.js
+const http = require("../../utils/http.js");
+const app = getApp();
 Component({
   /**
    * 组件的属性列表

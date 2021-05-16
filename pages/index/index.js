@@ -1,5 +1,6 @@
 // pages/index.js
-var t = require("../../utils/http.js"), e = require("../../utils/util.js"), a = require("../../utils/location.js"), i = getApp();
+const http = require("../../utils/http.js");
+const app = getApp();
 Page({
 
   /**
@@ -8,35 +9,31 @@ Page({
   data: {
     setList: []
   },
-  buy(e) {
-    let id = e.currentTarget.dataset.id;
-    let money = e.currentTarget.dataset.money;
-    console.log("id-money",id,money)
-    const _this = this;
-    t.post({
+  buy: function (e) {
+    const {id} = e.currentTarget.dataset;
+    const {uid} = app.userInfo;
+    console.log(3333, app.userInfo)
+    http.post({
         url: "/home/set/buy",
-        data: {setId:567,uid:333},
+        data: {setId: id, uid},
         success: function(res) {
-            if (res.statusCode === 200) {
-                console.log("res",res)
+            if (res.code === 200) {
                 wx.showToast({
                     decoration:5000,
                     title:"购买成功！"
                 })
-               
             }
         }
     });
 
   },
-  getSetList: function() {
+  getSetList: function () {
     const _this = this;
-    t.post({
+    http.post({
         url: "/home/set/list",
         data: {},
         success: function(res) {
-            if (res.statusCode === 200) {
-                console.log("list",res.data)
+            if (res.code === 200) {
                 _this.setData({
                     setList: res.data
                 });

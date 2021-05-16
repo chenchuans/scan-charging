@@ -1,4 +1,6 @@
 // pages/userRecord.js
+const http = require("../../utils/http.js");
+const app = getApp();
 Page({
 
   /**
