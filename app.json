@@ -7,7 +7,8 @@
     "pages/login/login",
     "pages/user/user",
     "pages/userRecord/userRecord",
-    "pages/buy/buy"
+    "pages/buy/buy",
+    "pages/registered/registered"
   ],
   "page": {
     "pages/index/index": {
@@ -20,13 +21,6 @@
     "pages/mine/mine": {
       "window": {
         "navigationBarTitleText": "我的",
-        "navigationBarTextStyle": "white",
-        "usingComponents": {}
-      }
-    },
-    "pages/login/login": {
-      "window": {
-        "navigationBarTitleText": "登录",
         "navigationBarTextStyle": "white",
         "usingComponents": {}
       }

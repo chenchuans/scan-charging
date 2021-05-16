@@ -1,1 +1,62 @@
 /* pages/user/user.wxss */
+.header{
+  position: sticky;
+  top:0rpx;
+  font-size: 26rpx;
+  padding: 30rpx 0;
+  background:#ffffff;
+}
+.wrap{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 30rpx;
+}
+.floor{
+  width: 100%;
+  min-height: 50rpx;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5rpx;
+}
+.input {
+  font-size: 26rpx;
+  width: 600rpx;
+  height: 40rpx;
+  text-indent: 20rpx;
+  border: 1rpx solid #ccc;
+  border-radius: 10rpx;
+}
+.area {
+  width: 600rpx;
+  min-height: 100rpx;
+  text-indent: 20rpx;
+  border: 1rpx solid #ccc;
+  border-radius: 10rpx;
+}
+.floor1{
+  margin-top: 20rpx;
+}
+.floor1 button{
+  width: 500rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background: rgb(125, 216, 72);
+}
+.list {
+  margin-top: 30rpx;
+  width: 100%;
+  font-size: 26rpx;
+  line-height: 36rpx;
+}
+.item{
+  background: rgb(245, 244, 244);
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20rpx;
+}
+.item .floor{
+  box-sizing:border-box;
+  padding: 0 10rpx;
+  display: flex;
+  justify-content:space-between;
+}

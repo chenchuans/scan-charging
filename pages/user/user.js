@@ -1,18 +1,57 @@
 // pages/user/user.js
+const http = require("../../utils/http.js");
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    value1:"",
+    value3:""
   },
-
+  submitMessage(){
+    const _this = this;
+    console.log(9789878)
+    http.post({
+        url: "/main/help/update",
+        data: {
+          "phone":this.data.value1,
+          "desctext":this.data.value3
+        },
+        success: function(res) {
+            if (res.statusCode === 200) {
+                console.log("res",res)
+                wx.showToast({
+                    decoration:5000,
+                    title:"提交成功！"
+                })
+               _this.getList()
+            }
+        }
+    });
+  },
+  getList() {
+    http.post({
+      url: "/main/help/list",
+      data: {},
+      success: function(res) {
+          if (res.statusCode === 200) {
+              console.log("getList",res)
+              // wx.showToast({
+              //     decoration:5000,
+              //     title:"购买成功！"
+              // })
+             
+          }
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(3433, app.userInfo);
   },
 
   /**

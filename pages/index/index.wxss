@@ -1,1 +1,32 @@
-/* pages/index.wxss */
+.modular-tabs{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 30rpx 30rpx;
+}
+.item{
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20rpx;
+  height: 100rpx;
+  border-radius: 10rpx;
+  line-height: 100rpx;
+  background:rgb(243, 240, 241);
+}
+.content{
+  width: 370rpx;
+}
+.price{
+  width: 190rpx;
+}
+.before {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0 20rpx;
+  border-radius: 20rpx;
+  background: #ccc;
+  background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F17%2F07%2F03%2F3ad91bb25a5f074cb00ac2704fcb4ce6.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623734650&t=2ebf46beeeffacf6952a088f3b78e871") no-repeat;
+  background-size: 100% 100%;
+}

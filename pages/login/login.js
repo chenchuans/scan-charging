@@ -1,5 +1,5 @@
 // pages/login/login.js
-const t = require("../../utils/http.js");
+const http = require("../../utils/http.js");
 const app = getApp();
 Page({
 
@@ -26,21 +26,29 @@ Page({
       password: e.detail.value
     });
   },
-  submit: function () {
+  registered: function () {
+    wx.navigateTo({
+      url: '/pages/registered/registered'
+    })
+  },
+  login: function () {
     const _this = this;
     const {password, phone, username} = this.data;
-      t.post({
-          url: "/main/user/login",
-          data: {password, phone, username},
-          success: function(res) {
-              if (res.statusCode === 200) {
-                  app.userInfo = {password, phone, username, uid: res.data.uid};
-              }
-              wx.showToast({
-                decoration: 2000,
-                title: res.message
-              });
-          }
-      });
+    http.post({
+        url: "/main/user/login",
+        data: {password, phone, username},
+        success: function(res) {
+            if (res.statusCode === 200) {
+                app.userInfo = {password, phone, username, uid: res.data.id};
+                wx.reLaunch({
+                  url: '/pages/index/index'
+                })
+            }
+            wx.showToast({
+              decoration: 2000,
+              title: res.message
+            });
+        }
+    });
   }
 })

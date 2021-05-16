@@ -1,2 +1,7 @@
-<!--pages/index.wxml-->
-<text>pages/index.wxml</text>
+<view class="modular-tabs">
+   <view class="item" wx:for="{{setList}}" wx:key="index" bind:tap="buy" data-id="{{item.id}}" data-money="{{item.money}}">
+        <view class="before"></view>
+        <view class="content">{{item.name}}</view>
+        <view class="price">金额：{{item.money}}</view>
+    </view>
+</view>

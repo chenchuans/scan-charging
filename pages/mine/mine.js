@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    uid: ''
+    uid: '',
+    isRegistered: false
   },
 
   /**
@@ -26,6 +27,7 @@ Page({
   onReady: function () {
 
   },
+  
   // 点击去登录
   bindLogin: function () {
     wx.navigateTo({

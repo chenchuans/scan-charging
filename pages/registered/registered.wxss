@@ -1,4 +1,3 @@
-/* pages/login/login.wxss */
 /* pages/registered/registered.wxss */
 .header{
   position: sticky;

@@ -1,2 +1,10 @@
 <!--pages/buy/buy.wxml-->
-<text>pages/buy/buy.wxml</text>
+<view class="list">
+    <view class="item" wx:for="{{15}}">
+      <view class="floor">
+        <view >问题名字</view>
+        <view >23456787654</view>
+      </view>
+      <view class="des">问题描述。卡的保持健康德川家康爱上即可参加卡卡删除吧,问题描述。卡的保持健康德川家康爱上即可参加卡卡删除吧</view>
+    </view>
+  </view>

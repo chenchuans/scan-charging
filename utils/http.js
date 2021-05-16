@@ -55,7 +55,7 @@ module.exports = {
         return t.method = "GET", e(t);
     },
     post: function(t) {
-        return t.method = "POST", t.header = t.header || {}, t.header["content-type"] = "application/x-www-form-urlencoded", 
+        return t.method = "POST", t.header = t.header || {}, 
         e(t);
     },
     put: function(t) {

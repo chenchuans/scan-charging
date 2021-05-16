@@ -1,4 +1,35 @@
 /* pages/mine.wxss */
+.login-now{
+  box-sizing: border-box;
+  width:720rpx;
+  height: 100rpx;
+  line-height: 80rpx;
+  margin: 30rpx auto;
+  background: rgba(164, 223, 110,0.6);
+  padding: 10rpx 30rpx;
+}
+.more-rec{
+  box-sizing: border-box;
+  height: 200rpx;
+  padding: 0 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.more-rec-item{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  background: rgba(55, 241, 126,0.5);
+}
+.more-rec-item-title{
+  width: 100%;
+  text-align: center;
+  line-height: 60rpx;
+}
 image {
   width: 30rpx;
   height: 30rpx;
