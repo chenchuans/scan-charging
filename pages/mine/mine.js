@@ -48,6 +48,19 @@ Page({
       url: '/pages/userRecord/userRecord'
     })
   },
+  // 分享
+  shareBtn() {
+    const {uid} = app.userInfo;
+    http.post({
+      url: "/main/user/invitation",
+      data: {uid},
+      success: function(res) {
+        console.log("getList",res)
+          if (res.statusCode === 200) {
+          }
+      }
+    });
+  },
   /**
    * 用户点击右上角分享
    */

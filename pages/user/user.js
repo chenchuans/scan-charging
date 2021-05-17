@@ -17,7 +17,7 @@ Page({
     const {phone, desctext} = this.data;
     http.post({
         url: "/main/help/update",
-        data: {phone, desctext, uid: 2},
+        data: {phone, desctext, uid},
         success: function(res) {
           console.log("res",res)
             if (res.statusCode === 200) {
@@ -33,16 +33,11 @@ Page({
   getList() {
     const {uid} = app.userInfo;
     http.post({
-      url: "/main/help/list",
-      data: {uid: 2},
+      url: "/main/use/list",
+      data: {uid},
       success: function(res) {
+        console.log("getList",res)
           if (res.statusCode === 200) {
-              console.log("getList",res)
-              // wx.showToast({
-              //     decoration:5000,
-              //     title:"购买成功！"
-              // })
-             
           }
       }
     });
