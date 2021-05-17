@@ -12,12 +12,11 @@ Page({
   buy: function (e) {
     const {id} = e.currentTarget.dataset;
     const {uid} = app.userInfo;
-    console.log(3333, app.userInfo)
     http.post({
         url: "/home/set/buy",
         data: {setId: id, uid},
         success: function(res) {
-            if (res.code === 200) {
+            if (res. statusCode === 200) {
                 wx.showToast({
                     decoration:5000,
                     title:"购买成功！"
@@ -33,7 +32,7 @@ Page({
         url: "/home/set/list",
         data: {},
         success: function(res) {
-            if (res.code === 200) {
+            if (res.statusCode === 200) {
                 _this.setData({
                     setList: res.data
                 });

@@ -19,10 +19,10 @@ module.exports = {
         const {url, data, success} = t;
         const list = ['/home/set/list', '/main/user/login', '/main/user/reg'];
         if (!list.includes(t.url) && !data.uid) {
-            wx.reLaunch({
-                url: '/pages/login/login'
-            });
-            return;
+            // wx.reLaunch({
+            //     url: '/pages/login/login'
+            // });
+            // return;
         }
         return new Promise((resolve, reject) => {
           //网络请求

@@ -7,9 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    username: '',
-    password: '',
-    phone: ''
+    username: '王恒',
+    password: '15229331551',
+    phone: '15229331551'
   },
   bindName: function (e) {
     this.setData({
@@ -37,17 +37,18 @@ Page({
     http.post({
         url: "/main/user/login",
         data: {password, phone, username},
-        success: function(res) {
-            if (res.code === 200) {
-                app.userInfo = {password, phone, username, uid: res.data.id};
-                wx.reLaunch({
-                  url: '/pages/index/index'
-                })
-            }
+        success: function({data: res}) {
             wx.showToast({
               decoration: 2000,
               title: res.message
             });
+            if (res.code === 200) {
+                app.userInfo = {password, phone, username, uid: res.data.id};
+                wx.setStorageSync('info', app.userInfo);
+                wx.reLaunch({
+                  url: '/pages/index/index'
+                })
+            }
         }
     });
   }

@@ -8,8 +8,7 @@ Page({
    */
   data: {
     uid: '',
-    username: '',
-    isRegistered: false
+    username: ''
   },
 
   /**

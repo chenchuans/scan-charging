@@ -7,7 +7,11 @@ App({
         phone: '',
         uid: ''
     },
-    // getApp: function () {
-    //     return 2222;
-    // }
+    onLaunch: function () {
+        const info = wx.getStorageSync('info', this.userInfo);
+        if (info) {
+            this.userInfo = info;
+        }
+
+    }
 });

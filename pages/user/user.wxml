@@ -2,25 +2,32 @@
 <view class="wrap">
   <view class="header">
     <view class="floor">
-    电话：<input class="input" type="number" value="{{value1}}" auto-focus placeholder="请输入电话号码"/>
+    电话：<input class="input" type="number" value="{{phone}}" auto-focus placeholder="请输入电话号码"/>
     </view>
     <!-- <view class="floor">
       问题：<input class="input" value="{{value2}}" placeholder="请输入问题"/>
     </view> -->
     <view class="floor">
-      描述：<textarea class="area" value="{{value3}}" auto-height placeholder="请输入问题描述" />
+      描述：<textarea class="area" value="{{desctext}}" auto-height placeholder="请输入问题描述" />
     </view>
     <view class="floor floor1">
       <button bind:tap="submitMessage">提交</button>
     </view>
   </view>
   <view class="list">
-    <view class="item" wx:for="{{15}}">
+    <!-- <view class="item" wx:for="{{15}}">
       <view class="floor">
         <view >问题名字</view>
         <view >23456787654</view>
       </view>
       <view class="des">问题描述。卡的保持健康德川家康爱上即可参加卡卡删除吧,问题描述。卡的保持健康德川家康爱上即可参加卡卡删除吧</view>
+    </view> -->
+    <view class="item" wx:for="{{list}}" wx:key="{{index}}">
+      <view class="floor">
+        <view >{{feedback}}</view>
+        <view >{{phone}}</view>
+      </view>
+      <view class="des">{{desctext}}</view>
     </view>
   </view>
 </view>

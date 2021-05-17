@@ -7,36 +7,36 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value1:"",
-    value3:""
+    phone:"",
+    desctext:"",
+    list: []
   },
   submitMessage(){
     const _this = this;
-    console.log(9789878)
+    const {uid} = app.userInfo;
+    const {phone, desctext} = this.data;
     http.post({
         url: "/main/help/update",
-        data: {
-          "phone":this.data.value1,
-          "desctext":this.data.value3
-        },
+        data: {phone, desctext, uid: 2},
         success: function(res) {
-            if (res.code === 200) {
-                console.log("res",res)
+          console.log("res",res)
+            if (res.statusCode === 200) {
                 wx.showToast({
-                    decoration:5000,
+                    decoration: 3000,
                     title:"提交成功！"
                 })
-               _this.getList()
+               _this.getList();
             }
         }
     });
   },
   getList() {
+    const {uid} = app.userInfo;
     http.post({
       url: "/main/help/list",
-      data: {},
+      data: {uid: 2},
       success: function(res) {
-          if (res.code === 200) {
+          if (res.statusCode === 200) {
               console.log("getList",res)
               // wx.showToast({
               //     decoration:5000,
@@ -51,7 +51,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(3433, app.userInfo);
+    this.getList();
   },
 
   /**

@@ -62,7 +62,7 @@ Page({
         url: "/main/user/reg",
         data: {password, username},
         success: function(res) {
-            if (res.code === 200) {
+            if (res. statusCode === 200) {
               wx.navigateTo({
                 url: '/pages/login/login',
               })
@@ -70,7 +70,7 @@ Page({
                 decoration: 2000,
                 title: res.message
               });
-            } else if (res.code === 201) {
+            } else if (res. statusCode === 201) {
               wx.showToast({
                 decoration: 2000,
                 title: res.message
