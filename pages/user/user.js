@@ -9,17 +9,24 @@ Page({
   data: {
     phone:"",
     desctext:"",
+    feedback: '',
     list: []
   },
   submitMessage(){
+    const {phone, desctext, feedback} = this.data;
+    if (!phone || !desctext || !feedback) {
+      wx.showToast({
+        decoration: 3000,
+        title:"输入框不能为空！"
+    })
+      return;
+    }
     const _this = this;
     const {uid} = app.userInfo;
-    const {phone, desctext} = this.data;
     http.post({
         url: "/main/help/update",
-        data: {phone, desctext, uid},
+        data: {phone, desctext, feedback, uid},
         success: function(res) {
-          console.log("res",res)
             if (res.statusCode === 200) {
                 wx.showToast({
                     decoration: 3000,
@@ -30,14 +37,32 @@ Page({
         }
     });
   },
+  bindDesc: function (e) {
+    this.setData({
+      desctext: e.detail.value
+    });
+  },
+  bindPhone: function (e) {
+    this.setData({
+      phone: e.detail.value
+    });
+  },
+  bindFeedback: function (e) {
+    this.setData({
+      feedback: e.detail.value
+    });
+  },
   getList() {
     const {uid} = app.userInfo;
+    const _this = this;
     http.post({
-      url: "/main/use/list",
+      url: "/main/help/list",
       data: {uid},
       success: function(res) {
-        console.log("getList",res)
           if (res.statusCode === 200) {
+            _this.setData({
+              list: res.data
+            });
           }
       }
     });
