@@ -1,1 +1,21 @@
 /* pages/scan/scan.wxss */
+.list {
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  margin-top: 30rpx;
+  width: 100%;
+  font-size: 26rpx;
+  line-height: 36rpx;
+}
+.item{
+  background: rgb(245, 244, 244);
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20rpx;
+}
+.item .floor{
+  box-sizing:border-box;
+  padding: 0 10rpx;
+  display: flex;
+  justify-content:space-between;
+}

@@ -28,7 +28,7 @@ Page({
       }
     });
   },
-  useScan() {
+  useScan: function () {
     const {uid} = app.userInfo;
     http.post({
       url: "/map/charging/use",
@@ -37,6 +37,26 @@ Page({
         console.log("getList",res)
           if (res.statusCode === 200) {
           }
+      }
+    });
+  },
+  bindScan: function() {
+    wx.scanCode({
+      onlyFromCamera: false,
+      scanType: ['barCode', 'qrCode', 'datamatrix','pdf417'],
+      success: res => {
+          console.log('sacl', res);
+      },
+      fail: res => {
+      // 接口调用失败
+      wx.showToast({
+          icon: 'none',
+          title: '接口调用失败！'
+      })
+      },
+      complete: res => {
+          // 接口调用结束
+          console.log(res)
       }
     });
   },
