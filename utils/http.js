@@ -1,5 +1,6 @@
 const app = getApp();
-const baseUrl = 'http://mayun.vaiwan.com/cp/v1';
+// const baseUrl = 'http://mayun.vaiwan.com/cp/v1';
+const baseUrl = 'https://c34a0a0fce09.ngrok.io/cp/v1';
 function http(e) {
     let n = wx.getStorageSync("networkType");
     let a = wx.getStorageSync("networkNomeShowModal");

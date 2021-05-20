@@ -1,16 +1,9 @@
 <!--pages/mine.wxml-->
 <view class="login-now" bindtap="bindLogin">{{uid ? username : '立即登录'}}</view>
-<view class="more-rec">
-    <view bindtap="shareBtn" class="more-rec-item">
-        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_fenxiang.png"></image>
-        <view class="more-rec-item-title">邀请好友</view>
-    </view>
-    <view bindtap="bindBuy" class="more-rec-item">
-        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_fenxiang.png"></image>
-        <view class="more-rec-item-title">购买记录</view>
-    </view>
-    <view bindtap="bindUser" class="more-rec-item">
-        <image class="more-rec-item-logo" src="https://charge-pile.oss-cn-hangzhou.aliyuncs.com/icon/icon_fenxiang.png"></image>
-        <view class="more-rec-item-title">使用记录</view>
-    </view>
+
+<view class='user-links'>
+    <view class='title'>管理</view>
+    <button class="link-contact" bindtap="shareBtn">邀请好友</button>
+    <button class="link-contact" bindtap="bindBuy">购买记录</button>
+    <button class="link-contact" bindtap="bindUser">使用记录</button>
 </view>
