@@ -5,7 +5,7 @@
     名称：<input class="input" bindinput="bindFeedback" value="{{feedback}}" placeholder="请输入问题名称"/>
     </view>
     <view class="floor">
-    电话：<input class="input" bindinput="bindPhone" type="number" value="{{phone}}" auto-focus placeholder="请输入电话号码"/>
+    手机：<input class="input" bindinput="bindPhone" type="number" value="{{phone}}" placeholder="请输入手机号码"/>
     </view>
     <view class="floor">
       描述：<textarea class="area" bindinput="bindDesc" value="{{desctext}}" auto-height placeholder="请输入问题描述" />
@@ -16,11 +16,9 @@
   </view>
   <view class="list">
     <view class="item" wx:for="{{list}}" wx:key="{{index}}">
-      <view class="floor">
-        <view >{{item.feedback}}</view>
-        <view >{{item.phone}}</view>
-      </view>
-      <view class="des">{{item.desctext}}</view>
+        <view class="desc">手机号码：{{item.phone}}</view>
+        <view class="desc">问题名称：{{item.feedback}}</view>
+      <view class="desc">问题描述：{{item.desctext}}</view>
     </view>
   </view>
 </view>

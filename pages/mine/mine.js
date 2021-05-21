@@ -55,8 +55,12 @@ Page({
       url: "/main/user/invitation",
       data: {uid},
       success: function(res) {
-        console.log("getList",res)
+        // console.log("getList",res)
           if (res.statusCode === 200) {
+            wx.showToast({
+              decoration:3000,
+              title:"分享成功"
+          })
           }
       }
     });

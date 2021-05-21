@@ -1,9 +1,7 @@
 <!--pages/userRecord.wxml-->
 <view class="list">
     <view class="item" wx:for="{{list}}" wx:key="{{index}}">
-      <view class="floor">
-        <view >{{item.time}}</view>
-      </view>
-      <view class="des">{{item.note}}</view>
+      <view class="floor">{{item.time}}</view>
+      <view class="desc">{{item.note}}</view>
     </view>
   </view>

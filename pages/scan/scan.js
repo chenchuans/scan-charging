@@ -18,12 +18,15 @@ Page({
   },
   getList: function () {
     const {uid} = app.userInfo;
+    const _this = this;
     http.post({
       url: "/map/charging/list",
       data: {uid},
       success: function(res) {
-        console.log("getList",res)
           if (res.statusCode === 200) {
+            _this.setData({
+              list: res.data
+            });
           }
       }
     });
@@ -31,21 +34,27 @@ Page({
   useScan: function () {
     const {uid} = app.userInfo;
     http.post({
-      url: "/map/charging/use",
+      url: "/map/charging/list",
       data: {uid},
       success: function(res) {
         console.log("getList",res)
           if (res.statusCode === 200) {
+            wx.showToast({
+              decoration: 3000,
+              title:"扫码成功！"
+          })
           }
       }
     });
   },
   bindScan: function() {
+    const _this = this;
     wx.scanCode({
       onlyFromCamera: false,
       scanType: ['barCode', 'qrCode', 'datamatrix','pdf417'],
       success: res => {
           console.log('sacl', res);
+          _this.useScan();
       },
       fail: res => {
       // 接口调用失败

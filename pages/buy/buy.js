@@ -11,12 +11,16 @@ Page({
   },
   getList() {
     const {uid} = app.userInfo;
+    const _this = this;
     http.post({
       url: "/main/order/list",
       data: {uid},
       success: function(res) {
         console.log("getList",res)
           if (res.statusCode === 200) {
+            _this.setData({
+              list: res.data
+            });
           }
       }
     });

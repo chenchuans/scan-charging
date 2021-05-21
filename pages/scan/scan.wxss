@@ -1,21 +1,42 @@
 /* pages/scan/scan.wxss */
+.page {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 30rpx;
+  overflow: scroll;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+.floor1 button{
+  width: 700rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  background: linear-gradient(#1dc486, #05b999);
+  border-radius: 50rpx;
+  margin: 40rpx auto;
+}
 .list {
   box-sizing: border-box;
-  padding: 0 30rpx;
-  margin-top: 30rpx;
   width: 100%;
   font-size: 26rpx;
   line-height: 36rpx;
 }
 .item{
-  background: rgb(245, 244, 244);
-  display: flex;
-  flex-wrap: wrap;
+  border-radius: 16rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 30rpx rgba(0, 0, 0, .1);
+  padding: 20rpx 10rpx;
   margin-bottom: 20rpx;
 }
 .item .floor{
+  width: 100%;
   box-sizing:border-box;
   padding: 0 10rpx;
-  display: flex;
-  justify-content:space-between;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+}
+.desc {
+  text-indent: 40rpx;
+  font-size: 26rpx;
+  line-height: 48rpx;
 }

@@ -4,19 +4,21 @@
   top:0rpx;
   font-size: 26rpx;
   padding: 30rpx 0;
-  background:#ffffff;
 }
 .wrap{
   box-sizing: border-box;
   width: 100%;
   padding: 0 30rpx;
+  overflow: scroll;
+  height: 100vh;
+  background-color: #f5f5f5;
 }
 .floor{
   width: 100%;
   min-height: 50rpx;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5rpx;
+  margin: 20rpx 0;
 }
 .input {
   font-size: 26rpx;
@@ -37,26 +39,34 @@
   margin-top: 20rpx;
 }
 .floor1 button{
-  width: 500rpx;
-  height: 60rpx;
-  line-height: 60rpx;
-  background: rgb(125, 216, 72);
+  width: 600rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  background: linear-gradient(#1dc486, #05b999);
+  border-radius: 50rpx;
 }
 .list {
-  margin-top: 30rpx;
+  box-sizing: border-box;
   width: 100%;
   font-size: 26rpx;
   line-height: 36rpx;
 }
 .item{
-  background: rgb(245, 244, 244);
-  display: flex;
-  flex-wrap: wrap;
+  border-radius: 16rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 30rpx rgba(0, 0, 0, .1);
+  padding: 20rpx 10rpx;
   margin-bottom: 20rpx;
 }
 .item .floor{
+  width: 100%;
   box-sizing:border-box;
   padding: 0 10rpx;
-  display: flex;
-  justify-content:space-between;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+}
+.desc {
+  text-indent: 40rpx;
+  font-size: 26rpx;
+  line-height: 48rpx;
 }

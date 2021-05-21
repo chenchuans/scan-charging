@@ -1,12 +1,14 @@
 <!--pages/scan/scan.wxml-->
-
-<button bindtap="bindScan" class="scan">扫码</button>
-<view class="list">
-    <view class="item" wx:for="{{15}}">
-      <view class="floor">
-        <view >问题名字</view>
-        <view >23456787654</view>
-      </view>
-      <view class="des">问题描述。卡的保持健康德川家康爱上即可参加卡卡删除吧,问题描述。卡的保持健康德川家康爱上即可参加卡卡删除吧</view>
+<view class="page">
+  <view class="floor floor1">
+      <button bindtap="bindScan">扫码</button>
+    </view>
+  <view class="list">
+    <view class="item" wx:for="{{list}}" wx:key="{{index}}">
+        <view class="desc">充电桩名称：{{item.name}}</view>
+        <view class="desc">金额：{{item.money}}元</view>
+        <view class="desc">充电桩限制时长：{{item.timelimit}}h</view>
+      <view class="desc">充电桩描述：{{item.desctext}}</view>
     </view>
   </view>
+</view>
