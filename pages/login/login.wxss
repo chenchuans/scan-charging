@@ -1,45 +1,81 @@
-/* pages/login/login.wxss */
-/* pages/registered/registered.wxss */
-.header{
-  position: sticky;
-  top:0rpx;
-  font-size: 26rpx;
-  padding: 30rpx 0;
-  background:#ffffff;
+.register {
+  text-align: center;
 }
-.wrap{
-  box-sizing: border-box;
+.head {
+  font-size: 24rpx;
+  margin-top: 16rpx;
+}
+/* .head image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  margin-bottom: 8rpx;
+} */
+.info {
+  margin-top: 40rpx;
+  text-align: left;
+  padding-left: 65rpx;
+  padding-right: 65rpx;
+}
+.info .item {
+  position: relative;
+  font-size: 32rpx;
+  color: #787993;
+  margin-bottom: 40rpx;
+  border-bottom: 1px solid #eee;
+}
+.info .item .code {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  font-size: 24rpx;
+  color: #FE454B;
+  height:80rpx;
+  line-height:80rpx;
+  padding:0 10rpx;
+}
+.info .item .code.check {
+  color: #666;
+}
+.info input {
+  height:80rpx;
+  line-height:80rpx;
+  
+  
+}
+.tel-input{width:78%;}
+.selType {
+  height:80rpx;
+  line-height:80rpx;
+}
+.selType image{
+  width: 40rpx;
+  height: 13rpx;
+  position: absolute;
+  top: 35rpx;
+  right: 10rpx;
+  
+}
+.fixed {
+  position: fixed;
+  text-align: center;
   width: 100%;
-  padding: 0 30rpx;
+  font-size: 24rpx;
+  color: #787993;
 }
-.floor{
-  width: 100%;
-  min-height: 50rpx;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5rpx;
-}
-.input {
-  font-size: 26rpx;
-  width: 600rpx;
-  height: 60rpx;
-  text-indent: 20rpx;
-  border: 1rpx solid #ccc;
+.fixed .sendregister {
+  width: 300rpx;
+  height: 88rpx;
+  line-height: 88rpx;
   border-radius: 10rpx;
-}
-.area {
-  width: 600rpx;
-  min-height: 100rpx;
-  text-indent: 20rpx;
-  border: 1rpx solid #ccc;
-  border-radius: 10rpx;
-}
-.floor1{
+  background-color: #FE454B;
+  margin: 0 auto;
+  font-size: 24rpx;
+  color: #fff;
+  text-align: center;
   margin-top: 20rpx;
+  margin-bottom: 32rpx;
 }
-.floor1 button{
-  width: 500rpx;
-  height: 60rpx;
-  line-height: 60rpx;
-  background: rgb(125, 216, 72);
-}
+

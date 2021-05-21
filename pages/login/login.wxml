@@ -1,15 +1,18 @@
-<view class="header">
-    <view class="floor">
-      名称：<input bindinput="bindName" class="input" placeholder="请输入名称" value="{{userName}}"></input>
+<view class="register">
+  <view class="info">
+    <view class="item">
+      <input bindinput="bindName" class="tel-input" placeholder="用户名" value="{{userName}}"></input>
     </view>
-    <view class="floor">
-      手机号：<input bindinput="bindPhone" class="input" cursorSpacing="20" maxlength="11" name="phone" placeholder="请输入手机号码" type="number" value="{{phone}}"></input>
+    <view class="item">
+      <input bindinput="bindPhone" class="tel-input" maxlength="11" placeholder="手机号码" type="number" value="{{phone}}"></input>
     </view>
-    <view class="floor">
-      密码：<input bindinput="bindPassword" class="input"  placeholder="请输入密码" value="{{password}}"></input>
+    <view class="item">
+      <input bindinput="bindPassword" class="tel-input" placeholder="密码" value="{{password}}"></input>
     </view>
-  <view class="floor floor1">
-      <button bindtap="login">登录</button>
-      <button bindtap="registered">注册</button>
-    </view>
+  </view>
+
+    <view class="fixed">
+    <button bindtap="login" class="sendregister">登录</button>
+    <button bindtap="registered" class="sendregister">去注册</button>
+  </view>
 </view>

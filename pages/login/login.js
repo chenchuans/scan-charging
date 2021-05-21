@@ -7,9 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    username: '王恒',
-    password: '15229331551',
-    phone: '15229331551'
+    username: '',
+    password: '',
+    phone: ''
   },
   bindName: function (e) {
     this.setData({

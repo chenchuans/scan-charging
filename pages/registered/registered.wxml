@@ -1,12 +1,17 @@
-<!--pages/registered/registered.wxml-->
-<view class="header">
-    <view class="floor">
-      名称：<input bindinput="bindName" class="input" placeholder="请输入名称" value="{{userName}}"></input>
+<view class="register">
+  <view class="info">
+    <view class="item">
+      <input bindinput="bindName" class="tel-input" placeholder="用户名" value="{{userName}}"></input>
     </view>
-    <view class="floor">
-      密码：<input bindinput="bindPassword" class="input"  placeholder="请输入密码" value="{{password}}"></input>
+    <view class="item">
+      <input bindinput="bindPhone" class="tel-input" maxlength="11" placeholder="手机号码" type="number" value="{{phone}}"></input>
     </view>
-  <view class="floor floor1">
-      <button bindtap:tap="registered">注册</button>
+    <view class="item">
+      <input bindinput="bindPassword" class="tel-input" placeholder="密码" value="{{password}}"></input>
     </view>
+  </view>
+
+    <view class="fixed">
+    <button bindtap="registered" class="sendregister">注册</button>
+  </view>
 </view>
