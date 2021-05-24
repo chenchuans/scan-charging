@@ -4,9 +4,6 @@
       <input bindinput="bindName" class="tel-input" placeholder="用户名" value="{{userName}}"></input>
     </view>
     <view class="item">
-      <input bindinput="bindPhone" class="tel-input" maxlength="11" placeholder="手机号码" type="number" value="{{phone}}"></input>
-    </view>
-    <view class="item">
       <input bindinput="bindPassword" class="tel-input" placeholder="密码" value="{{password}}"></input>
     </view>
   </view>

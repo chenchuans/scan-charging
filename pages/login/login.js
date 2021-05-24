@@ -8,17 +8,11 @@ Page({
    */
   data: {
     username: '',
-    password: '',
-    phone: ''
+    password: ''
   },
   bindName: function (e) {
     this.setData({
       username: e.detail.value
-    });
-  },
-  bindPhone: function (e) {
-    this.setData({
-      phone: e.detail.value
     });
   },
   bindPassword: function (e) {
