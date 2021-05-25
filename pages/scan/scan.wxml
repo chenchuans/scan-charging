@@ -3,6 +3,12 @@
   <view class="floor floor1">
       <button bindtap="bindScan">扫码</button>
     </view>
+    <view class="" hover-class="none" hover-stop-propagation="false" style="width: 100%; height: 100%;">
+
+<map id="map" longitude="{{longitude}}" latitude=" {{latitude}}" markers="{{markers}}" scale="13" show-location style="width: 100%; height: 100%;"></map>
+{{longitude}}
+
+</view>
   <view class="list">
     <view class="item" wx:for="{{list}}" wx:key="{{index}}">
         <view class="desc">充电桩名称：{{item.name}}</view>

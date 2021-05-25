@@ -16,8 +16,11 @@ Page({
       url: "/main/order/list",
       data: {uid},
       success: function(res) {
-        console.log("getList",res)
           if (res.statusCode === 200) {
+            wx.showToast({
+              decoration: 2000,
+              title: res.message
+            });
             _this.setData({
               list: res.data
             });

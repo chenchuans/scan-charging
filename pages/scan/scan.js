@@ -7,14 +7,41 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: []
+    list: [],
+    longitude: 113.324520,
+    latitude: 23.099994,
+    markers:[{
+      id: 0,
+      iconPath: "../../icons/focus.png",
+      latitude: 23.099994,
+      longitude: 113.324520,
+      width: 50,
+      height: 50
+    }]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(){
     this.getList();
+    let _this = this;
+    wx.getLocation({
+      type: "wgs84",
+      success: function(res){
+        var latitude = res.latitude;
+        var longitude = res.longitude;
+       console.log(res.latitude);
+        _this.setData({
+         latitude: res.latitude,
+         longitude: res.longitude,
+         markers:[{
+           latitude: res.latitude,
+           longitude: res.longitude
+         }]
+        })
+      }
+    })
   },
   getList: function () {
     const {uid} = app.userInfo;
@@ -34,10 +61,9 @@ Page({
   useScan: function () {
     const {uid} = app.userInfo;
     http.post({
-      url: "/map/charging/list",
+      url: "/map/charging/use",
       data: {uid},
       success: function(res) {
-        console.log("getList",res)
           if (res.statusCode === 200) {
             wx.showToast({
               decoration: 3000,
@@ -49,25 +75,26 @@ Page({
   },
   bindScan: function() {
     const _this = this;
-    wx.scanCode({
-      onlyFromCamera: false,
-      scanType: ['barCode', 'qrCode', 'datamatrix','pdf417'],
-      success: res => {
-          console.log('sacl', res);
-          _this.useScan();
-      },
-      fail: res => {
-      // 接口调用失败
-      wx.showToast({
-          icon: 'none',
-          title: '接口调用失败！'
-      })
-      },
-      complete: res => {
-          // 接口调用结束
-          console.log(res)
-      }
-    });
+    this.useScan();
+    // wx.scanCode({
+    //   onlyFromCamera: false,
+    //   scanType: ['barCode', 'qrCode', 'datamatrix','pdf417'],
+    //   success: res => {
+    //       console.log('sacl', res);
+    //       _this.useScan();
+    //   },
+    //   fail: res => {
+    //   // 接口调用失败
+    //   wx.showToast({
+    //       icon: 'none',
+    //       title: '接口调用失败！'
+    //   })
+    //   },
+    //   complete: res => {
+    //       // 接口调用结束
+    //       console.log(res)
+    //   }
+    // });
   },
 
   /**
