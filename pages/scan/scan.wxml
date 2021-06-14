@@ -1,20 +1,13 @@
 <!--pages/scan/scan.wxml-->
-<view class="page">
+<view class="page" hover-class="none" hover-stop-propagation="false">
   <view class="floor floor1">
       <button bindtap="bindScan">扫码</button>
-    </view>
-    <view class="" hover-class="none" hover-stop-propagation="false" style="width: 100%; height: 100%;">
-
-<map id="map" longitude="{{longitude}}" latitude=" {{latitude}}" markers="{{markers}}" scale="13" show-location style="width: 100%; height: 100%;"></map>
-{{longitude}}
-
-</view>
-  <view class="list">
-    <view class="item" wx:for="{{list}}" wx:key="{{index}}">
-        <view class="desc">充电桩名称：{{item.name}}</view>
-        <view class="desc">金额：{{item.money}}元</view>
-        <view class="desc">充电桩限制时长：{{item.timelimit}}h</view>
-      <view class="desc">充电桩描述：{{item.desctext}}</view>
-    </view>
+  </view>
+  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" scale="14" show-location bindmarkertap="bindmarkertap"  bindtap="bindMapTap"></map>
+  <view class="dialog" wx:if="{{showDialog}}">
+    <view class="title">名称：{{currentShowItem.name}}</view>
+    <view class="bottom">￥{{currentShowItem.money}}元 / {{currentShowItem.timelimit}}小时</view>
+    <view class="desc">描述：{{currentShowItem.desctext}}</view>
+    <view class="btn" bindtap="useScan">去使用</view>
   </view>
 </view>

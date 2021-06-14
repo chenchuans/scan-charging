@@ -2,22 +2,13 @@
 const http = require("../../utils/http.js");
 const app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     list: [],
-    longitude: 113.324520,
-    latitude: 23.099994,
-    markers:[{
-      id: 0,
-      iconPath: "../../icons/focus.png",
-      latitude: 23.099994,
-      longitude: 113.324520,
-      width: 50,
-      height: 50
-    }]
+    showDialog: false,
+    longitude: 0, //地图界面中心的经度
+    latitude: 0, //地图界面中心的纬度
+    markers: [], //标志点的位置
+    currentShowItem: {}
   },
 
   /**
@@ -25,20 +16,34 @@ Page({
    */
   onLoad: function(){
     this.getList();
-    let _this = this;
+    // this.setData({
+    //   list: [{"id":4,"name":"2","money":2.0,"desctext":"2","timelimit":2},{"id":5,"name":"3","money":3.0,"desctext":"3","timelimit":3},{"id":6,"name":"4","money":4.0,"desctext":"4","timelimit":4},{"id":19,"name":"7日套餐","money":10.0,"desctext":"7日套餐","timelimit":7},{"id":20,"name":"24小时充电套餐","money":20.0,"desctext":"套餐描述","timelimit":1}]
+    // });
+    // this.onMap();
+  },
+  onMap: function (length = 0) {
+    // const length = this.data.list.length;
+    const _this = this;
     wx.getLocation({
       type: "wgs84",
-      success: function(res){
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-       console.log(res.latitude);
+      success: function({latitude, longitude}){
+       console.log("当前位置的经纬度为：",latitude, longitude);
+       let markers = [];
+       for (let index = 0; index < length; index++) {
+          let num = Math.floor(Math.random() * 999 - 1) / 100000;
+          markers.push({
+            id: index,
+            iconPath: "../../icons/fujin3x.png",
+            latitude: latitude + (index > length / 2 ? num : -num),
+            longitude: longitude + (index < length / 2 ? num : -num),
+            width: 28,
+            height: 28
+          });
+       }
         _this.setData({
-         latitude: res.latitude,
-         longitude: res.longitude,
-         markers:[{
-           latitude: res.latitude,
-           longitude: res.longitude
-         }]
+          latitude,
+          longitude,
+          markers
         })
       }
     })
@@ -54,6 +59,7 @@ Page({
             _this.setData({
               list: res.data
             });
+            this.onMap(res.data.length);
           }
       }
     });
@@ -67,8 +73,11 @@ Page({
           if (res.statusCode === 200) {
             wx.showToast({
               decoration: 3000,
-              title:"扫码成功！"
-          })
+              title: "成功！"
+            })
+            this.setData({
+              showDialog: false
+            })
           }
       }
     });
@@ -96,53 +105,20 @@ Page({
     //   }
     // });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  bindmarkertap(e) {
+    // 点击地图触发点，可以触发
+    const index = e.detail.markerId;
+    this.setData({
+      showDialog: true,
+      currentShowItem: this.data.list[index]
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  bindMapTap: function () {
+    if (this.data.showDialog) {
+      this.setData({
+        showDialog: false
+      })
+    }
   }
+  
 })
